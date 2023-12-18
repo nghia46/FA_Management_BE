@@ -1,0 +1,46 @@
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  image: mcr.microsoft.com/dotnet/sdk:7.0
+  script:
+    - dotnet build --configuration Release
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  image: alpine/curl
+  script:
+    - >
+      retry_count=3
+    - >
+      while [ $retry_count -gt 0 ]; do
+      response_code=$(curl -s -o deployment_output.html -w "%{http_code}" --request POST https://fabackend.scm.azurewebsites.net/deploy 
+      -u $DEPLOYMENT_CREDENTIAL 
+      -H "Content-Type: application/json" 
+      -d "{\"format\":\"basic\",\"url\":\"$CI_REPOSITORY_URL\"}");
+      echo "HTTP Status Code: $response_code"; 
+      if [ $response_code -ge 500 ] && [ $response_code -lt 600 ]; then
+      echo "Retrying deployment. Retries left: $((retry_count-1))";
+      sleep 5;
+      retry_count=$((retry_count-1));
+      else
+      break;
+      fi
+      done
+    - >
+      if [ $response_code -ne 200 ] && [ $response_code -ne 202 ]; then
+      echo "Deployment failed with final HTTP Status Code: $response_code";
+      exit 1; 
+      fi
+  only:
+    - main
+  needs:
+    - build
+  artifacts:
+    when: on_failure
+    paths:
+      - deployment_output.html

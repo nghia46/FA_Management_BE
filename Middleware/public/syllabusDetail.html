@@ -1,0 +1,720 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <link href="css/select2/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/SweetAlert2/sweetalert2.min.css">
+    <link rel="icon" href="img/uniGate_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/syllabusDetail.css">
+    <title>Home</title>
+
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+</head>
+
+<body>
+    <div class="loading-backdrop" id="loadingBackdrop">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" id="main-page-header">
+        </header>
+        <main class="d-flex flex-grow-1 flex-row">
+            <div class="" style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <div class="d-flex flex-grow-1 flex-row">
+                <div id="navbar" class="" style="background-color: #edf2f7;"></div>
+                <div id="syllabus" class="flex-grow-1">
+                    <!-- content -->
+                    <h1 id="title">
+                        <p>Syllabus</p>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <span id="name"></span>
+                                <span id="status"></span>
+                            </div>
+
+                            <div id="syl-dropdown" class="dropdown">
+                                <a onclick="myFunction(this)" class="dropbtn">
+                                    <div class="svg" style="pointer-events: none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
+                                            <path
+                                                d="M13 15C14.1046 15 15 14.1046 15 13C15 11.8954 14.1046 11 13 11C11.8954 11 11 11.8954 11 13C11 14.1046 11.8954 15 13 15Z"
+                                                fill="#2D3748"></path>
+                                            <path
+                                                d="M20 15C21.1046 15 22 14.1046 22 13C22 11.8954 21.1046 11 20 11C18.8954 11 18 11.8954 18 13C18 14.1046 18.8954 15 20 15Z"
+                                                fill="#2D3748"></path>
+                                            <path
+                                                d="M6 15C7.10457 15 8 14.1046 8 13C8 11.8954 7.10457 11 6 11C4.89543 11 4 11.8954 4 13C4 14.1046 4.89543 15 6 15Z"
+                                                fill="#2D3748"></path>
+                                        </svg>
+                                    </div>
+                                </a>
+                                <div class="dropdown-content">
+                                    <div style="width: 184px; color: var(--Main, #2D3748);
+                                        /* subtitle1/bold */
+                                        font-family: Inter;
+                                        font-size: 16px;
+                                        font-style: normal;
+                                        font-weight: 600;
+                                        line-height: 24px; /* 150% */">
+                                        Manage
+                                    </div>
+                                    <hr style="width: 184px;
+                                    height: 1px; background: #E2E8F0; margin: auto;" />
+                                    <div class="dropdown-options">
+                                        <a href="#about">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <g clip-path="url(#clip0_45_1811)">
+                                                    <path
+                                                        d="M3 17.25V21H6.75L17.81 9.94L14.06 6.19L3 17.25ZM5.92 19H5V18.08L14.06 9.02L14.98 9.94L5.92 19ZM20.71 5.63L18.37 3.29C18.17 3.09 17.92 3 17.66 3C17.4 3 17.15 3.1 16.96 3.29L15.13 5.12L18.88 8.87L20.71 7.04C21.1 6.65 21.1 6.02 20.71 5.63Z"
+                                                        fill="#285D9A" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_45_1811">
+                                                        <rect width="24" height="24" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            Edit syllabus</a>
+                                        <a href="#contact">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <path
+                                                    d="M15.7895 3H5.68421C4.75789 3 4 3.77727 4 4.72727V16.8182H5.68421V4.72727H15.7895V3ZM18.3158 6.45455H9.05263C8.12632 6.45455 7.36842 7.23182 7.36842 8.18182V20.2727C7.36842 21.2227 8.12632 22 9.05263 22H18.3158C19.2421 22 20 21.2227 20 20.2727V8.18182C20 7.23182 19.2421 6.45455 18.3158 6.45455ZM18.3158 20.2727H9.05263V8.18182H18.3158V20.2727Z"
+                                                    fill="#285D9A" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_45_1814">
+                                                        <rect width="24" height="24" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            Duplicate syllabus</a>
+                                        <a href="#contact">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <g clip-path="url(#clip0_252_20369)">
+                                                    <path
+                                                        d="M12 6.00001C15.79 6.00001 19.17 8.13001 20.82 11.5C20.23 12.72 19.4 13.77 18.41 14.62L19.82 16.03C21.21 14.8 22.31 13.26 23 11.5C21.27 7.11001 17 4.00001 12 4.00001C10.73 4.00001 9.51 4.20001 8.36 4.57001L10.01 6.22001C10.66 6.09001 11.32 6.00001 12 6.00001ZM10.93 7.14001L13 9.21001C13.57 9.46001 14.03 9.92001 14.28 10.49L16.35 12.56C16.43 12.22 16.49 11.86 16.49 11.49C16.5 9.01001 14.48 7.00001 12 7.00001C11.63 7.00001 11.28 7.05001 10.93 7.14001ZM2.01 3.87001L4.69 6.55001C3.06 7.83001 1.77 9.53001 1 11.5C2.73 15.89 7 19 12 19C13.52 19 14.98 18.71 16.32 18.18L19.74 21.6L21.15 20.19L3.42 2.45001L2.01 3.87001ZM9.51 11.37L12.12 13.98C12.08 13.99 12.04 14 12 14C10.62 14 9.5 12.88 9.5 11.5C9.5 11.45 9.51 11.42 9.51 11.37ZM6.11 7.97001L7.86 9.72001C7.63 10.27 7.5 10.87 7.5 11.5C7.5 13.98 9.52 16 12 16C12.63 16 13.23 15.87 13.77 15.64L14.75 16.62C13.87 16.86 12.95 17 12 17C8.21 17 4.83 14.87 3.18 11.5C3.88 10.07 4.9 8.89001 6.11 7.97001Z"
+                                                        fill="#2D3748" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_252_20369">
+                                                        <rect width="24" height="24" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            De-activate syllabus</a>
+                                        <a href="#contact">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <g clip-path="url(#clip0_45_1817)">
+                                                    <path
+                                                        d="M14.12 10.47L12 12.59L9.87 10.47L8.46 11.88L10.59 14L8.47 16.12L9.88 17.53L12 15.41L14.12 17.53L15.53 16.12L13.41 14L15.53 11.88L14.12 10.47ZM15.5 4L14.5 3H9.5L8.5 4H5V6H19V4H15.5ZM6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V7H6V19ZM8 9H16V19H8V9Z"
+                                                        fill="#2C5282" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_45_1817">
+                                                        <rect width="24" height="24" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            Delete syllabus</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>NPL v4.0</div>
+                    </h1>
+                    <div class="duration">
+                        <p><b id="duration"></b> days <span id="duration-hours"></span></p>
+                        <p>Modified on <span id="createOn"></span> by <b id="createBy"></b></p>
+                    </div>
+                    <div class="row">
+                        <div class="syllabus-detail">
+                            <div class="syllabus-tab d-flex">
+                                <a href="#general"><div class="tab active">General</div></a>
+                                <a href="#outline"><div id="syllabus-tab-2" class="tab">Outline</div></a>
+                                <a href="#others"><div class="tab">Others</div></a>
+                            </div>
+                            <div class="content">
+                                <div class="requirement d-flex">
+                                    <div class="syllabus-req">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25"
+                                            viewBox="0 0 24 25" fill="none">
+                                            <g clip-path="url(#clip0_252_20124)">
+                                                <path
+                                                    d="M12 7.63L12.97 9.92L13.44 11.03L14.64 11.13L17.11 11.34L15.23 12.97L14.32 13.76L14.59 14.94L15.15 17.35L13.03 16.07L12 15.43L10.97 16.05L8.85 17.33L9.41 14.92L9.68 13.74L8.77 12.95L6.89 11.32L9.36 11.11L10.56 11.01L11.03 9.9L12 7.63ZM12 2.5L9.19 9.13L2 9.74L7.46 14.47L5.82 21.5L12 17.77L18.18 21.5L16.54 14.47L22 9.74L14.81 9.13L12 2.5Z"
+                                                    fill="#2D3748" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_252_20124">
+                                                    <rect width="24" height="24" fill="white"
+                                                        transform="translate(0 0.5)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                        <b style="margin-right: 20px;">Level</b>
+                                        <span>All Levels</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25"
+                                            viewBox="0 0 24 25" fill="none">
+                                            <g clip-path="url(#clip0_252_20129)">
+                                                <path
+                                                    d="M9 14.25C6.66 14.25 2 15.42 2 17.75V19.5H16V17.75C16 15.42 11.34 14.25 9 14.25ZM4.34 17.5C5.18 16.92 7.21 16.25 9 16.25C10.79 16.25 12.82 16.92 13.66 17.5H4.34ZM9 12.5C10.93 12.5 12.5 10.93 12.5 9C12.5 7.07 10.93 5.5 9 5.5C7.07 5.5 5.5 7.07 5.5 9C5.5 10.93 7.07 12.5 9 12.5ZM9 7.5C9.83 7.5 10.5 8.17 10.5 9C10.5 9.83 9.83 10.5 9 10.5C8.17 10.5 7.5 9.83 7.5 9C7.5 8.17 8.17 7.5 9 7.5ZM16.04 14.31C17.2 15.15 18 16.27 18 17.75V19.5H22V17.75C22 15.73 18.5 14.58 16.04 14.31ZM15 12.5C16.93 12.5 18.5 10.93 18.5 9C18.5 7.07 16.93 5.5 15 5.5C14.46 5.5 13.96 5.63 13.5 5.85C14.13 6.74 14.5 7.83 14.5 9C14.5 10.17 14.13 11.26 13.5 12.15C13.96 12.37 14.46 12.5 15 12.5Z"
+                                                    fill="#2D3748" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_252_20129">
+                                                    <rect width="24" height="24" fill="white"
+                                                        transform="translate(0 0.5)" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                        <b style="margin-right: 20px;">Attendee number</b>
+                                        <span>20</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
+                                            <g clip-path="url(#clip0_252_20134)">
+                                                <path
+                                                    d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM19 11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19L19 6.3V11ZM7.41 11.59L6 13L10 17L18 9L16.59 7.58L10 14.17L7.41 11.59Z"
+                                                    fill="#2D3748" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_252_20134">
+                                                    <rect width="24" height="24" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                        <b style="margin-right: 20px;">Output standard</b>
+                                        <span>H4SD</span>
+                                    </div>
+                                    <div class="req-textbox">
+                                        <div class="d-flex gap-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none">
+                                                <g clip-path="url(#clip0_252_20142)">
+                                                    <path
+                                                        d="M19.43 12.98C19.47 12.66 19.5 12.34 19.5 12C19.5 11.66 19.47 11.34 19.43 11.02L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.57 5.11 19.4 5.02 19.22 5.02C19.16 5.02 19.1 5.03 19.05 5.05L16.56 6.05C16.04 5.65 15.48 5.32 14.87 5.07L14.49 2.42C14.46 2.18 14.25 2 14 2H9.99996C9.74996 2 9.53996 2.18 9.50996 2.42L9.12996 5.07C8.51996 5.32 7.95996 5.66 7.43996 6.05L4.94996 5.05C4.88996 5.03 4.82996 5.02 4.76996 5.02C4.59996 5.02 4.42996 5.11 4.33996 5.27L2.33996 8.73C2.20996 8.95 2.26996 9.22 2.45996 9.37L4.56996 11.02C4.52996 11.34 4.49996 11.67 4.49996 12C4.49996 12.33 4.52996 12.66 4.56996 12.98L2.45996 14.63C2.26996 14.78 2.21996 15.05 2.33996 15.27L4.33996 18.73C4.42996 18.89 4.59996 18.98 4.77996 18.98C4.83996 18.98 4.89996 18.97 4.94996 18.95L7.43996 17.95C7.95996 18.35 8.51996 18.68 9.12996 18.93L9.50996 21.58C9.53996 21.82 9.74996 22 9.99996 22H14C14.25 22 14.46 21.82 14.49 21.58L14.87 18.93C15.48 18.68 16.04 18.34 16.56 17.95L19.05 18.95C19.11 18.97 19.17 18.98 19.23 18.98C19.4 18.98 19.57 18.89 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.98ZM17.45 11.27C17.49 11.58 17.5 11.79 17.5 12C17.5 12.21 17.48 12.43 17.45 12.73L17.31 13.86L18.2 14.56L19.28 15.4L18.58 16.61L17.31 16.1L16.27 15.68L15.37 16.36C14.94 16.68 14.53 16.92 14.12 17.09L13.06 17.52L12.9 18.65L12.7 20H11.3L11.11 18.65L10.95 17.52L9.88996 17.09C9.45996 16.91 9.05996 16.68 8.65996 16.38L7.74996 15.68L6.68996 16.11L5.41996 16.62L4.71996 15.41L5.79996 14.57L6.68996 13.87L6.54996 12.74C6.51996 12.43 6.49996 12.2 6.49996 12C6.49996 11.8 6.51996 11.57 6.54996 11.27L6.68996 10.14L5.79996 9.44L4.71996 8.6L5.41996 7.39L6.68996 7.9L7.72996 8.32L8.62996 7.64C9.05996 7.32 9.46996 7.08 9.87996 6.91L10.94 6.48L11.1 5.35L11.3 4H12.69L12.88 5.35L13.04 6.48L14.1 6.91C14.53 7.09 14.93 7.32 15.33 7.62L16.24 8.32L17.3 7.89L18.57 7.38L19.27 8.59L18.2 9.44L17.31 10.14L17.45 11.27ZM12 8C9.78996 8 7.99996 9.79 7.99996 12C7.99996 14.21 9.78996 16 12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8ZM12 14C10.9 14 9.99996 13.1 9.99996 12C9.99996 10.9 10.9 10 12 10C13.1 10 14 10.9 14 12C14 13.1 13.1 14 12 14Z"
+                                                        fill="#2D3748" />
+                                                </g>
+                                                <defs>
+                                                    <clipPath id="clip0_252_20142">
+                                                        <rect width="24" height="24" fill="white" />
+                                                    </clipPath>
+                                                </defs>
+                                            </svg>
+                                            <b>Technical Requirement(s)</b>
+                                        </div>
+                                        <div>Trainees’ PCs need to have following software installed & run without any
+                                            issues:
+                                        </div>
+                                        <ul>
+                                            <li>Microsoft SQL Server 2005</li>
+                                            <li>Microsoft Visual Studio 2017</li>
+                                            <li>Microsoft Office 2007 (Visio, Word, PowerPoint)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="course-objective">
+                                    <div class="d-flex gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none">
+                                            <g clip-path="url(#clip0_252_20149)">
+                                                <path
+                                                    d="M5 15H3V19C3 20.1 3.9 21 5 21H9V19H5V15ZM5 5H9V3H5C3.9 3 3 3.9 3 5V9H5V5ZM19 3H15V5H19V9H21V5C21 3.9 20.1 3 19 3ZM19 19H15V21H19C20.1 21 21 20.1 21 19V15H19V19ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"
+                                                    fill="#2D3748" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_252_20149">
+                                                    <rect width="24" height="24" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                        <b>Course objectives</b>
+                                    </div>
+                                    <div>
+                                        This topic is to introduce about C# programming language knowledge; adapt
+                                        trainees with
+                                        skills, lessons and practices which is specifically used in the Fsoft projects.
+                                    </div>
+                                    <div>
+                                        In details, after completing the topic, trainees will:</div>
+                                    <ul>
+                                        <li>Understand basic concepts of high-level programming languages (keyword,
+                                            statement,
+                                            operator, control-of-flow)</li>
+                                        <li>Understand and distinguish two concepts: class (Class) and object (Object)
+                                        </li>
+                                        <li>Understand and apply object-oriented programming knowledge to resolve simple
+                                            problems
+                                            (Inheritance, Encapsulation, Abstraction, Polymorphism)</li>
+                                        <li>Working with some of the existing data structures in C# (List, ArrayList,
+                                            HashTable,
+                                            Dictionary)</li>
+                                        <li>Know how to control program errors (use try ... catch..finally, throw,
+                                            throws)</li>
+                                        <li>Be able to working with concurrency and multi-thread in C#</li>
+                                        <li>Be able to working with common classes in ADO.net: SqlConnection,
+                                            SqlCommand,
+                                            SqlParameter, SqlDataAdapter, SqlDataReader</li>
+                                        <li>Be able to manipulate SQL data from Window Form Application via 4 basic
+                                            commands:
+                                            Add,
+                                            Update, Delete, Select</li>
+                                        <li>Know how to design UI screen in Window Form Application</li>
+                                        <li>Know how to use approciate controls for each field/data type: Textbox,
+                                            Label,
+                                            Combobox, Radio, DateTimePicker, NumericUpDown, RichTextBox</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="content-2" class="content d-none">
+                                <div id="accordion">
+                                    <div class="card day">
+                                        <div class="card-header day-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn day-btn collapsible" data-target="day-2-units">
+                                                    Day 2
+                                                </button>
+
+                                            </h5>
+                                        </div>
+
+                                        <div id="day-2-units" class="collapse-content">
+                                            <div class="card-body day-body">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">
+                                                        <div class="unit">
+                                                            <div class="unit-title">
+                                                                <div class="unit-number">
+                                                                    <h3>Unit 5</h3>
+                                                                </div>
+                                                                <div class="unit-title-info">
+                                                                    <h3>.NET Introduction</h3>
+                                                                    <span>3hrs</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="unit-expand collapsible"
+                                                                data-target="contain-lesson-1"
+                                                                data-parent="day-2-units">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <g clip-path="url(#clip0_252_20185)">
+                                                                        <path
+                                                                            d="M12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 15L8 11H16L12 15Z"
+                                                                            fill="#2D3748" />
+                                                                    </g>
+                                                                    <defs>
+                                                                        <clipPath id="clip0_252_20185">
+                                                                            <rect width="24" height="24" fill="white" />
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                        <div class="contain-lesson collapse-content"
+                                                            id="contain-lesson-1">
+                                                            <ul class="lesson-list">
+                                                                <li class="lesson">
+                                                                    <span class="lesson-title">.NET Introduction</span>
+                                                                    <div class="lesson-info">
+                                                                        <span class="lesson-output-std">
+                                                                            H4SD
+                                                                        </span>
+                                                                        <span class="lesson-time">
+                                                                            30mins
+                                                                        </span>
+                                                                        <span class="lesson-type">
+                                                                            Online
+                                                                        </span>
+                                                                        <span>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none">
+                                                                                <g clip-path="url(#clip0_1554_8693)">
+                                                                                    <path
+                                                                                        d="M9 13C11.21 13 13 11.21 13 9C13 6.79 11.21 5 9 5C6.79 5 5 6.79 5 9C5 11.21 6.79 13 9 13ZM9 7C10.1 7 11 7.9 11 9C11 10.1 10.1 11 9 11C7.9 11 7 10.1 7 9C7 7.9 7.9 7 9 7ZM9 15C6.33 15 1 16.34 1 19V21H17V19C17 16.34 11.67 15 9 15ZM3 19C3.22 18.28 6.31 17 9 17C11.7 17 14.8 18.29 15 19H3ZM15.08 7.05C15.92 8.23 15.92 9.76 15.08 10.94L16.76 12.63C18.78 10.61 18.78 7.56 16.76 5.36L15.08 7.05ZM20.07 2L18.44 3.63C21.21 6.65 21.21 11.19 18.44 14.37L20.07 16C23.97 12.11 23.98 6.05 20.07 2Z"
+                                                                                        fill="#2D3748" />
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_1554_8693">
+                                                                                        <rect width="24" height="24"
+                                                                                            fill="white" />
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none">
+                                                                                <path
+                                                                                    d="M20 6H12L10 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6ZM20 18H4V6H9.17L11.17 8H20V18ZM17.5 12.12V15.5H14.5V10.5H15.88L17.5 12.12ZM13 9V17H19V11.5L16.5 9H13Z"
+                                                                                    fill="#2D3748" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="lesson">
+                                                                    <span class="lesson-title">.NET Introduction</span>
+                                                                    <div class="lesson-info">
+                                                                        <span class="lesson-output-std">
+                                                                            H4SD
+                                                                        </span>
+                                                                        <span class="lesson-time">
+                                                                            30mins
+                                                                        </span>
+                                                                        <span class="lesson-type">
+                                                                            Online
+                                                                        </span>
+                                                                        <span>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none">
+                                                                                <g clip-path="url(#clip0_1554_8693)">
+                                                                                    <path
+                                                                                        d="M9 13C11.21 13 13 11.21 13 9C13 6.79 11.21 5 9 5C6.79 5 5 6.79 5 9C5 11.21 6.79 13 9 13ZM9 7C10.1 7 11 7.9 11 9C11 10.1 10.1 11 9 11C7.9 11 7 10.1 7 9C7 7.9 7.9 7 9 7ZM9 15C6.33 15 1 16.34 1 19V21H17V19C17 16.34 11.67 15 9 15ZM3 19C3.22 18.28 6.31 17 9 17C11.7 17 14.8 18.29 15 19H3ZM15.08 7.05C15.92 8.23 15.92 9.76 15.08 10.94L16.76 12.63C18.78 10.61 18.78 7.56 16.76 5.36L15.08 7.05ZM20.07 2L18.44 3.63C21.21 6.65 21.21 11.19 18.44 14.37L20.07 16C23.97 12.11 23.98 6.05 20.07 2Z"
+                                                                                        fill="#2D3748" />
+                                                                                </g>
+                                                                                <defs>
+                                                                                    <clipPath id="clip0_1554_8693">
+                                                                                        <rect width="24" height="24"
+                                                                                            fill="white" />
+                                                                                    </clipPath>
+                                                                                </defs>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <span>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none">
+                                                                                <path
+                                                                                    d="M20 6H12L10 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6ZM20 18H4V6H9.17L11.17 8H20V18ZM17.5 12.12V15.5H14.5V10.5H15.88L17.5 12.12ZM13 9V17H19V11.5L16.5 9H13Z"
+                                                                                    fill="#2D3748" />
+                                                                            </svg>
+                                                                        </span>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+
+                                                        </div>
+
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <div class="unit">
+                                                            <div class="unit-title">
+                                                                <div class="unit-number">
+                                                                    <h3>Unit 5</h3>
+                                                                </div>
+                                                                <div class="unit-title-info">
+                                                                    <h3>.NET Introduction</h3>
+                                                                    <span>3hrs</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="unit-expand">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <g clip-path="url(#clip0_252_20185)">
+                                                                        <path
+                                                                            d="M12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 15L8 11H16L12 15Z"
+                                                                            fill="#2D3748" />
+                                                                    </g>
+                                                                    <defs>
+                                                                        <clipPath id="clip0_252_20185">
+                                                                            <rect width="24" height="24" fill="white" />
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card day">
+                                        <div class="card-header day-header" id="headingTwo">
+                                            <h5 class="mb-0">
+                                                <button class="btn day-btn collapsible" data-target="day-3-units">
+                                                    Day 3
+                                                </button>
+
+                                            </h5>
+                                        </div>
+                                        <div id="day-3-units" class="collapse-content">
+                                            <div class="card-body day-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                terry
+                                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                                dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                                                moon
+                                                tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer
+                                                labore
+                                                wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+                                                butcher
+                                                vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                                                aesthetic
+                                                synth nesciunt you probably haven't heard of them accusamus labore
+                                                sustainable VHS.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card day">
+                                        <div class="card-header day-header" id="headingThree">
+                                            <h5 class="mb-0">
+                                                <button class="btn day-btn collapsible" data-target="day-4-units">
+                                                    Day 4
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="day-4-units" class="collapse-content">
+                                            <div class="card-body day-body">
+                                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
+                                                terry
+                                                richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
+                                                dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf
+                                                moon
+                                                tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
+                                                assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer
+                                                labore
+                                                wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur
+                                                butcher
+                                                vice lomo. Leggings occaecat craft beer farm-to-table, raw denim
+                                                aesthetic
+                                                synth nesciunt you probably haven't heard of them accusamus labore
+                                                sustainable VHS.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="content-3" class="other content">
+                                <div class="other-first-row">
+                                    <div class="card">
+                                        <div class="card-header text-white">
+                                            Time Allocation
+                                        </div>
+                                        <div class="time-chart card-body">
+                                            <div class="chart" style="height: 200px; width: 200px;">
+                                                <canvas id="chart"></canvas>
+                                            </div>
+                                            <ul class="chart-info">
+                                                <li><span class="chart-name">Assignment/Lab </span>(<span
+                                                        class="chart-percent">54</span>%)</li>
+                                                <li><span class="chart-name">Concept/Lecture </span>(<span
+                                                        class="chart-percent">29</span>%)</li>
+                                                <li><span class="chart-name">Guide/Review </span>(<span
+                                                        class="chart-percent">9</span>%)</li>
+                                                <li><span class="chart-name">Test/Quiz </span>(<span
+                                                        class="chart-percent">1</span>%)</li>
+                                                <li><span class="chart-name">Exam </span>(<span
+                                                        class="chart-percent">6</span>%)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="assessment card">
+                                        <div class="card-header text-white">
+                                            Assessment scheme
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="first-assessment">
+                                                <label for="quiz">Quiz*</label>
+                                                <div class="mb-2">15%</div>
+                                                <label for="assignment">Assignment*</label>
+                                                <div class="mb-2">15%</div>
+                                                <label for="final">Final*</label>
+                                                <div class="mb-2">70%</div>
+                                            </div>
+                                            <div class="second-assessment">
+                                                <div class="assessment-field">
+                                                    <label for="finalTheory">Final Theory*</label>
+                                                    <div class="mb-2">40%</div>
+                                                </div>
+                                                <div class="assessment-field">
+                                                    <label for="finalPractice">Final Practice*</label>
+                                                    <div class="mb-2">60%</div>
+                                                </div>
+                                            </div>
+                                            <div class="third-assessment">
+                                                <div style="margin-bottom: 10px;">Passing criteria</div>
+                                                <div class="passing-crit assessment-field">
+                                                    <label for="gpa">GPA*</label>
+                                                    <div class="mb-2">70%</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="other-second-row">
+                                    <div class="card">
+                                        <div class="card-header text-white">
+                                            Training delivery principle
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="training-delivery-field">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <g clip-path="url(#clip0_252_18567)">
+                                                        <path
+                                                            d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM19 11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19L19 6.3V11ZM7.41 11.59L6 13L10 17L18 9L16.59 7.58L10 14.17L7.41 11.59Z"
+                                                            fill="#2D3748" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_252_18567">
+                                                            <rect width="24" height="24" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <label for="training">Training</label>
+                                                <ul>
+                                                    <li>Trainee who actively complete online learning according to MOOC
+                                                        links provided</li>
+                                                    <li>At the end of the day, students complete Daily Quiz for 30
+                                                        minutes</li>
+                                                    <li>Trainer/Mentor supports answering questions, guiding exercises
+                                                        1.5-2.0h/day</li>
+                                                    <li>Trainer conduct the workshops</li>
+                                                    <li>Trainees complete Assignments and Labs</li>
+                                                    <li>Trainees have 1 final test in 4 hours (1 hour theory + 3 hours
+                                                        of practice)
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="training-delivery-field">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <g clip-path="url(#clip0_252_18567)">
+                                                        <path
+                                                            d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM19 11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19L19 6.3V11ZM7.41 11.59L6 13L10 17L18 9L16.59 7.58L10 14.17L7.41 11.59Z"
+                                                            fill="#2D3748" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_252_18567">
+                                                            <rect width="24" height="24" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <label for="retest">Re-test</label>
+                                                <ul>
+                                                    <li>Only allow each student to retake the test up to 2 times</li>
+                                                    <li>Re-exam the same structure as the Final Test</li>
+                                                </ul>
+                                            </div>
+                                            <div class="training-delivery-field">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <g clip-path="url(#clip0_252_18567)">
+                                                        <path
+                                                            d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM19 11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19L19 6.3V11ZM7.41 11.59L6 13L10 17L18 9L16.59 7.58L10 14.17L7.41 11.59Z"
+                                                            fill="#2D3748" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_252_18567">
+                                                            <rect width="24" height="24" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <label for="marking">Marking</label>
+                                                <ul>
+                                                    <li>Mentor review students on 2 Assignments</li>
+                                                    <li>Mentor marks the 3 Quizzes and Final Exam Theory</li>
+                                                    <li>Trainer marks the Final Exam Practice</li>
+                                                    <li>If the trainees have to retake test, the score will be calculated:</li>
+                                                    <li>The score >=6, the score will be 6</li>
+                                                    <li>The score < 6, the score will be that score</li>
+                                                </ul>
+                                            </div>
+                                            <div class="training-delivery-field">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <g clip-path="url(#clip0_252_18567)">
+                                                        <path
+                                                            d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM19 11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19L19 6.3V11ZM7.41 11.59L6 13L10 17L18 9L16.59 7.58L10 14.17L7.41 11.59Z"
+                                                            fill="#2D3748" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_252_18567">
+                                                            <rect width="24" height="24" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <label for="waiverCriteria">Waiver Criteria</label>
+                                                <ul>
+                                                    <li>Students pass the quick test</li>
+                                                    <li>Trainer Audit: rank B</li>
+                                                </ul>
+                                            </div>
+                                            <div class="training-delivery-field">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <g clip-path="url(#clip0_252_18567)">
+                                                        <path
+                                                            d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1ZM19 11C19 15.52 16.02 19.69 12 20.93C7.98 19.69 5 15.52 5 11V6.3L12 3.19L19 6.3V11ZM7.41 11.59L6 13L10 17L18 9L16.59 7.58L10 14.17L7.41 11.59Z"
+                                                            fill="#2D3748" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_252_18567">
+                                                            <rect width="24" height="24" fill="white" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <label for="others">Others</label>
+                                                <ul>
+                                                    <li>Trainers can allow students to complete homework and submit the next day</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="time-allocation card col-3 d-none">
+                            <div class="card-header text-white">
+                                Time Allocation
+                            </div>
+                            <div class="card-body">
+                                <div class="chart" style="height: 123px;">
+                                    <canvas id="chart"></canvas>
+                                </div>
+                                <ul class="chart-info">
+                                    <li><span class="chart-namea">Assignment/Lab</span><br>(<span
+                                            class="chart-percentt">54</span>%)</li>
+                                    <li><span class="chart-namea">Concept/Lecture</span><br>(<span
+                                            class="chart-percentt">29</span>%)</li>
+                                    <li><span class="chart-namea">Guide/Review</span><br>(<span
+                                            class="chart-percentt">9</span>%)</li>
+                                    <li><span class="chart-namea">Test/Quiz</span><br>(<span
+                                            class="chart-percentt">1</span>%)</li>
+                                    <li><span class="chart-namea">Exam</span><br>(<span
+                                            class="chart-percentt">6</span>%)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+
+    <script src="component/header.js"></script>
+    <script src="component/footer.js"></script>
+    <script src="component/navbar.js"></script>
+
+    <script src="js/default.js" type="module"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/syllabusDetail.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <link href="css/select2/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/SweetAlert2/sweetalert2.min.css">
+    <title>Confirm your Profile</title>
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+</head>
+<style>
+    h1{
+        font-size: calc(1.5rem + 1.7vw);
+        margin-bottom: 2.5rem;
+    }
+
+    .form-check-male{
+        margin-top: 1rem;
+    }
+
+    .container {
+        margin-top: 100px;
+        margin-left: 25%;
+        margin-right: 25%;
+        padding: auto;
+    }
+
+    .input-group-text {
+        border-radius: 8px 0 0 8px;
+        width: 8rem;
+    }
+
+    .warning {
+        color: #ff0000;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+    .validation-message{
+        color: #ff0000;
+    }
+    .input-group-sm
+    {
+        margin-top:1rem ;
+    }
+    .form-control {
+      display: flex;
+      align-items: center;
+      margin-bottom: -1px;
+    }
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type='number'] {
+        -moz-appearance: textfield; /* Firefox */
+    }
+    .otp-field{
+        text-align: center;
+    }
+
+    .dob-input {
+        width: 50%;
+    }
+</style>
+
+<body>
+    <div class="d-flex flex-column" style="height: 100vh; width: 100%;">
+        <header class="bg-main text-white px-5 py-1" id="main-page-header">
+        </header>
+        <main class="d-flex flex-grow-1 flex-row">
+            <div class="" style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <!--Render here-->
+            <div class="container">
+                <h1>Confirm your Info</h1>
+                <form action="">
+                    <!-- Phone -->
+                    <div class="input-group-container">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                
+                                <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
+                            </div>
+                            <input type="number" id="phone" placeholder="Phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+                            <button id="sendOtp" type="button">Send OTP</button>
+                            <small id="phone"></small>
+                        </div>
+                    </div>
+                    <div id="phoneValidation" class="input-group-container"></div>
+                        
+                      <div class="input-group input-group-sm" id="otp-container" style="display: none;">
+                        <div class="input-group-prepend">       
+                        </div>          
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp1"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp2');"
+                        onkeydown="focusPreviousInput(this, 'otp1')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp2"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp3', 'otp1');"
+                        onkeydown="focusPreviousInput(this, 'otp1')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp3"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp4', 'otp2');"
+                        onkeydown="focusPreviousInput(this, 'otp2')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp4"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp5', 'otp3');"
+                        onkeydown="focusPreviousInput(this, 'otp3')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp5"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp6', 'otp4');"
+                        onkeydown="focusPreviousInput(this, 'otp4')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp6"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp6', 'otp5');"
+                        onkeydown="focusPreviousInput(this, 'otp5')"  >
+                        <button id="verifyOtp" type="button">Verify</button>
+                        <small id="verify"></small>
+                        <span></span>
+                      </div>
+
+                    <div class="input-group-container">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">DOB</span>
+                            </div>
+                            <input id="dob" type="date" class="form-control dob-input" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <!-- Gender -->
+                    <div class="form-check form-check-male">
+                        <input id="male" class="form-check-input" type="radio" name="gender" id="male" value="male">
+                        <label class="form-check-label" for="male">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input id="female" class="form-check-input" type="radio" name="gender" id="female"
+                            value="female">
+                        <label class="form-check-label" for="female">
+                            Female
+                        </label>
+                    </div>                   
+                    <button style="margin-top: 1rem;" id="submit" type="submit" class="btn btn-primary">Confirm</button>
+                </form>
+            </div>
+        </main>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+
+</body>
+
+<script>
+    function limitToOneDigit(inputField) {
+      if (inputField.value > 9) {
+        inputField.value = 9;
+      }
+    }
+    function moveToNextInput(inputField, nextInputId, previousInputId) {
+      if (inputField.value && inputField.value.length === 1) {
+        const nextInput = document.getElementById(nextInputId);
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    }
+    function focusPreviousInput(inputField, previousInputId) {
+      if (inputField.value === "" && event.key === "Backspace") {
+        const previousInput = document.getElementById(previousInputId);
+        if (previousInput) {
+          previousInput.focus();
+        }
+      }
+    }
+</script>
+</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="component/headerConfirm.js"></script>
+<script src="component/footer.js"></script>
+<script src="js/porfileValidation.js" type="module"></script>
+<script src="js/login.js"></script>
+<script type="module" src="js/verifyProfile.js"></script>
+<!-- <script type="module" src="js/verifyProfile.js"></script> -->
+<script src="js/default.js" type="module"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+</body>
+</html>

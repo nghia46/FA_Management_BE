@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  fa_back-end:
+    image: ${DOCKER_REGISTRY-}fa_backend
+    build:
+      context: .
+      dockerfile: FA_BACK-END/Dockerfile
+    ports:
+      - "80:80"  # Host:Container
+  frontend:
+    image: ${DOCKER_REGISTRY-}fa_frontend
+    build:
+      context: .
+      dockerfile: fafrontend/Dockerfile

@@ -1,0 +1,315 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/SweetAlert2/sweetalert2.min.css">
+    <link rel="icon" href="img/uniGate_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/dataTable.css">
+    <link rel="stylesheet" href="css/syllabus.css">
+    <link rel="stylesheet" href="css/Date Range Picker/daterangepicker.css">
+    <title>View syllabus</title>
+
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+    <script src="js/DateRangePicker/moment.min.js"></script>
+    <script src="js/DateRangePicker/daterangepicker.js"></script>
+</head>
+
+<body>
+    <div class="loading-backdrop loading-active" id="loadingBackdrop">
+        <div class="loading-spinner"></div>
+      </div>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" id="main-page-header">
+        </header>
+        <main class="d-flex flex-grow-1 flex-row">
+            <div class="" style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <div class="flex-grow-1 overflow-x-scroll mx-2">
+                <h1>Syllabus</h1>
+                <div class="row m-0">
+                    <div class="col-6 ps-0">
+                        <form id="search-syllabus">
+                            <div class="input-group">
+                                <input type="text" name="searchValue" class="form-control" placeholder="Search by">
+                                <input type="text" name="createDate" class="form-control" placeholder="Created date">
+                                <input type="submit" value="Search" class="btn btn-outline-secondary">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col text-end pe-0">
+                        <button type="button" class="btn btn-primary" id="open-import-dialog-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_1743_3956)">
+                                    <path
+                                        d="M9 16H15V10H19L12 3L5 10H9V16ZM12 5.83L14.17 8H13V14H11V8H9.83L12 5.83ZM5 18H19V20H5V18Z"
+                                        fill="#DFDEDE" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1743_3956">
+                                        <rect width="24" height="24" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            Import
+                        </button>
+                        <button type="button" class="btn btn-secondary">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_1743_4097)">
+                                    <path
+                                        d="M13 7H11V11H7V13H11V17H13V13H17V11H13V7ZM12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20Z"
+                                        fill="#DFDEDE" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1743_4097">
+                                        <rect width="24" height="24" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            Add Syllabus
+                        </button>
+                    </div>
+                </div>
+                <div class="table-container container-fluid p-0">
+                    <table class="table table-striped table-hover data-table" id="table-syllabus-data">
+                        <thead class="table-dark">
+                            <tr>
+                                <th class="sortable sortable-asc" data-col-name="Name">
+                                    Syllabus
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_46_5442)">
+                                            <path
+                                                d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                                fill="#DFDEDE" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_46_5442">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </th>
+                                <th class="sortable" data-col-name="Code">
+                                    Code
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_46_5442)">
+                                            <path
+                                                d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                                fill="#DFDEDE" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_46_5442">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </th>
+                                <th class="sortable" data-col-name="CreateOn">
+                                    Created on
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_46_5442)">
+                                            <path
+                                                d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                                fill="#DFDEDE" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_46_5442">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </th>
+                                <th class="sortable" data-col-name="CreateBy">
+                                    Created by
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_46_5442)">
+                                            <path
+                                                d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                                fill="#DFDEDE" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_46_5442">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </th>
+                                <th class="sortable" data-col-name="Duration">
+                                    Duration
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_46_5442)">
+                                            <path
+                                                d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                                fill="#DFDEDE" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_46_5442">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </th>
+                                <th>Output standard</th>
+                                <th class="sortable" data-col-name="Status">
+                                    Status
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_46_5442)">
+                                            <path
+                                                d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                                fill="#DFDEDE" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_46_5442">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    No input
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row m-3">
+                        <div class="col flex-grow-1 text-center" id="pagination">
+                        </div>
+                        <div class="col-2">
+                            <div class="row">
+                                <label for="pagination-page-size" class="col form-label text-nowrap">Row per
+                                    page</label>
+                                <select class="form-select col" name="pageSize" id="pagination-page-size">
+                                    <option selected value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+    </div>
+    <dialog id="add-syllabus-dialog" class="p-0">
+        <table class="table m-0" style="width: 100%;">
+            <thead class="table-dark">
+                <th class="text-center">
+                    <div class="d-flex flex-row align-items-center">
+                        <span class="flex-grow-1 my-2">
+                            Import Syllabus
+                        </span>
+                    </div>
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form id="import-syllabus-form">
+                            <fieldset>
+                                <legend class="fw-bold">
+                                    Import setting
+                                </legend>
+                                <div class="row mb-3">
+                                    <label for="input-csv-file" class="col-sm-4 col-form-label fw-semibold">File (csv)</label>
+                                    <div class="col-sm-8">
+                                        <input type="file" class="form-control" name="csvFile" id="input-csv-file"
+                                            accept=".csv" required>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <span class="col-sm-4 fw-semibold">Import template</span>
+                                    <div class="col-sm-8">
+                                        <a href="csv-template/template.csv">Download</a>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <hr>
+                            <fieldset>
+                                <legend class="fw-bold">
+                                    Duplicate control
+                                </legend>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 my-1 fw-semibold">
+                                        Scanning
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-check form-check-inline">
+                                            <input type="checkbox" class="form-check-input" name="duplicateCheckField"
+                                                value="Code" id="check-by-syllabus-code" checked>
+                                            <label for="check-by-syllabus-code" class="form-check-label">Syllabus
+                                                code</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="checkbox" class="form-check-input" name="duplicateCheckField"
+                                                value="Name" id="check-by-syllabus-name">
+                                            <label for="check-by-syllabus-name" class="form-check-label">Syllabus
+                                                name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-sm-4 my-1 fw-semibold">
+                                        Duplicate handle
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="duplicateHandleMethod"
+                                                value="create" id="duplicate-handle-create-new" checked>
+                                            <label for="duplicate-handle-create-new" class="form-check-label">Create
+                                                new</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="duplicateHandleMethod"
+                                                value="replace" id="duplicate-handle-replace">
+                                            <label for="duplicate-handle-replace"
+                                                class="form-check-label">Replace</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="radio" class="form-check-input" name="duplicateHandleMethod"
+                                                value="skip" id="duplicate-handle-skip">
+                                            <label for="duplicate-handle-skip" class="form-check-label">Skip</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <hr>
+                            <div class="text-end">
+                                <input type="reset" value="Cancel" class="btn btn-outline-danger">
+                                <input type="submit" name="action" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </dialog>
+
+    <script src="component/header.js"></script>
+    <script src="component/footer.js"></script>
+    <script src="component/navbar.js"></script>
+
+    <script src="js/default.js" type="module"></script>
+    <script src="js/syllabus.js" type="module"></script>
+</body>
+
+</html>

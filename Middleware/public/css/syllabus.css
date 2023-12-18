@@ -1,0 +1,23 @@
+dialog {
+    min-width: 500px;
+    max-width: 50%;
+    scale: 0.75;
+    opacity: 0;
+    transition: scale 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+dialog.show-dialog {
+    opacity: 1;
+    scale: 1;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+#add-syllabus-dialog{
+    border-radius: 10px;
+    border: none;
+    overflow-x: hidden;
+}

@@ -1,0 +1,494 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <link href="css/select2/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/SweetAlert2/sweetalert2.min.css">
+    <link rel="icon" href="img/uniGate_logo.png" type="image/x-icon">
+    <title>Create program</title>
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+    <link rel="stylesheet" href="css/createProgram.css">
+    <style>
+        .selectable-syllabus-row {
+            cursor: pointer;
+        }
+
+        .selecting-syllabus-row td {
+            background-color: blue !important;
+            color: white !important;
+        }
+
+        .selectable-syllabus-row.selected-syllabus-row {
+            cursor: not-allowed;
+        }
+
+        .selected-syllabus-row td {
+            background-color: gray !important;
+        }
+
+        .active-page {
+            background-color: gray !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" id="main-page-header">
+        </header>
+        <main class="d-flex flex-grow-1 flex-row">
+            <div id="main-page-navigation" style="background-color: #edf2f7;">
+            </div>
+            <div class="flex-grow-1 d-flex flex-column overflow-x-scroll mt-1">
+                <div class="bg-main text-white px-3 py-1 mb-1" id="training-program-page-header">
+                    <h1>New Training Program</h1>
+                </div>
+                <div class="row m-0" id="training-program-name-form-container">
+                    <form id="add-training-program">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">New program name</span>
+                            </div>
+                            <input id="training-program-name" type="text" name="NameProgram" class="form-control"
+                                placeholder="Name Training Program" id="inputTrainingProgram"
+                                style="font-size: 14; font-weight: 600;">
+                            <input type="submit" class="btn btn-primary" value="Create new">
+                        </div>
+                    </form>
+                </div>
+                <div class="ms-1 flex-grow-1 d-none" id="add-syllabuses-to-program-section" style="display: flex; flex-direction: column;">
+                    <div class="ms-1">
+                        <span class="fs-3 fw-bold">
+                            <span id="program-day-number">0</span> days
+                        </span>
+                        <span class="fs-6">
+                            (<span id="program-hour-number">0</span> hours)
+                        </span>
+                    </div>
+                    <div class="ms-1 fst-italic">
+                        Created by
+                        <span class="fw-bold" id="program-owner-name">...</span>
+                        on
+                        <span id="program-created-date" class="">...</span>
+                    </div>
+                    <hr>
+                    <div class="ms-1">
+                        <h6>Information:</h6>
+                        <textarea id="program-info-text"></textarea>
+                    </div>
+                    <div class="ms-1 flex-grow-1">
+                        <h6>Content:</h6>
+                        <ul id="selected-syllabus-list" style="list-style-type: none;" class="ps-0">
+
+                        </ul>
+                        <button class="align-self-end btn btn-primary" id="show-search-syllabus-dialog-button">Add
+                            syllabus</button>
+                    </div>
+                    <div class="mt-1">
+                        <button class="btn btn-secondary" id="program-previous-button">Previous</button>
+                        <button class="btn btn-outline-danger" id="program-cancel-button">Cancel</button>
+                        <button class="btn btn-primary" id="program-save-button">Save</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+
+    <dialog id="search-syllabus-dialog">
+        <div class="loading-backdrop" id="loadingBackdrop">
+            <div class="loading-spinner"></div>
+          </div>
+        <div class="input-group mb-2">
+            <input type="text" id="syllabus-search-input" class="form-control" placeholder="Search syllabus">
+            <button class="btn btn-primary" id="syllabus-search-button">Search</button>
+        </div>
+        <table class="table table-striped table-hover data-table" id="table-syllabus-data">
+            <thead class="table-dark">
+                <tr>
+                    <th style="border-radius: 10px 0 0 0;" class="sortable sortable-asc" data-col-name="Name">
+                        Syllabus
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_46_5442)">
+                                <path
+                                    d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                    fill="#DFDEDE" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_46_5442">
+                                    <rect width="18" height="18" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </th>
+                    <th class="sortable" data-col-name="Code">
+                        Code
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_46_5442)">
+                                <path
+                                    d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                    fill="#DFDEDE" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_46_5442">
+                                    <rect width="18" height="18" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </th>
+                    <th class="sortable" data-col-name="CreateOn">
+                        Created on
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_46_5442)">
+                                <path
+                                    d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                    fill="#DFDEDE" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_46_5442">
+                                    <rect width="18" height="18" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </th>
+                    <th class="sortable" data-col-name="CreateBy">
+                        Created by
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_46_5442)">
+                                <path
+                                    d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                    fill="#DFDEDE" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_46_5442">
+                                    <rect width="18" height="18" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </th>
+                    <th class="sortable" data-col-name="Duration">
+                        Duration
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_46_5442)">
+                                <path
+                                    d="M5.70833 13.5H7.54167C7.79375 13.5 8 13.1625 8 12.75C8 12.3375 7.79375 12 7.54167 12H5.70833C5.45625 12 5.25 12.3375 5.25 12.75C5.25 13.1625 5.45625 13.5 5.70833 13.5ZM5.25 5.25C5.25 5.6625 5.45625 6 5.70833 6H13.0417C13.2937 6 13.5 5.6625 13.5 5.25C13.5 4.8375 13.2937 4.5 13.0417 4.5H5.70833C5.45625 4.5 5.25 4.8375 5.25 5.25ZM5.70833 9.75H10.2917C10.5438 9.75 10.75 9.4125 10.75 9C10.75 8.5875 10.5438 8.25 10.2917 8.25H5.70833C5.45625 8.25 5.25 8.5875 5.25 9C5.25 9.4125 5.45625 9.75 5.70833 9.75Z"
+                                    fill="#DFDEDE" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_46_5442">
+                                    <rect width="18" height="18" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </th>
+                    <th style="border-radius: 0 10px 0 0;">Output standard</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="cursor: pointer;">
+                    <td colspan="6">
+                        No input
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row m-3">
+            <div class="col flex-grow-1 text-center" id="pagination">
+            </div>
+            <div class="col-2">
+                <div class="row">
+                    <label for="pagination-page-size" class="col form-label text-nowrap">Row per
+                        page</label>
+                    <select class="form-select col" name="pageSize" id="pagination-page-size">
+                        <option selected value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button id="close-search-syllabus-dialog-button" class="btn btn-outline-danger">
+            Cancel
+        </button>
+        <button id="add-syllabus-and-close-dialog" class="btn btn-primary" disabled>Add selected syllabus</button>
+    </dialog>
+    <script src="plugin/ckeditor/ckeditor.js"></script>
+    <script type="module">
+        import { getAllSyllabus, getSyllabus } from "./js/Services/syllabus.service.js";
+        import {addTrainingProgram} from "./js/Services/trainingprogram.service.js"
+        window.currentPage = 1;
+        window.selectedSyllabusList = [];
+            ClassicEditor
+                .create(document.querySelector("#program-info-text"), {})
+                .then((editor) => { window.programInfo = editor; })
+                .catch((err) => { console.log(err); });
+        $("#syllabus-search-button").click(function () {
+            getSyllabusData();
+        });
+        $("#close-search-syllabus-dialog-button").click(function () {
+            $("#search-syllabus-dialog")[0].close();
+        });
+        $("#show-search-syllabus-dialog-button").click(function () {
+            $("#search-syllabus-dialog")[0].showModal();
+            window.currentPage = 1;
+            getSyllabusData();
+        });
+        $("#add-training-program").submit(function (e) {
+            e.preventDefault();
+            let programName = $("#training-program-name").val();
+            $("#training-program-page-header").empty();
+            $("#training-program-page-header").append(`<h4 class="ps-3 fw-light">Training program</h4>`);
+            $("#training-program-page-header").append(`<h2>${programName}</h2>`);
+            $("#training-program-name-form-container").addClass("d-none");
+            $("#add-syllabuses-to-program-section").removeClass("d-none");
+        });
+        $(".sortable").click(function () {
+            if ($(this).hasClass("sortable-asc")) {
+                $(this).removeClass("sortable-asc");
+                $(this).addClass("sortable-desc");
+            } else if ($(this).hasClass("sortable-desc")) {
+                $(this).removeClass("sortable-desc");
+                $(this).addClass("sortable-asc");
+            } else {
+                if ($(".sortable-asc").length !== 0)
+                    $(".sortable-asc").removeClass("sortable-asc");
+                if ($(".sortable-desc").length !== 0)
+                    $(".sortable-desc").removeClass("sortable-desc");
+                $(this).addClass("sortable-asc");
+            }
+            getSyllabusData();
+        });
+        $("#pagination-page-size").change(function () {
+            getSyllabusData();
+        });
+        $("#add-syllabus-and-close-dialog").click(function () {
+            let selectedSyllabusId = $(".selecting-syllabus-row").attr("data-syllabus-id");
+            if (selectedSyllabusId !== undefined) {
+                getSyllabus(selectedSyllabusId).
+                    then((res) => {
+                        let status = {};
+                        if (res.status === 0) {
+                            status.text = "Inactive";
+                            status.color = "gray";
+                        } else if (res.status === 1) {
+                            status.text = "Active";
+                            status.color = "orange";
+                        } else {
+                            status.text = "Draft";
+                            status.color = "lightblue";
+                        }
+                        let newEntry = `
+                    <li class="p-3 mb-1 syllabus-list-entry" style="border: 1px solid black; border-radius: 10px;" data-syllabus-days="${res.days.length}" data-syllabus-duration="${res.trainingTime}">
+                        <div class="d-flex justify-content-center">
+                            <h2>${res.name}</h2>
+                            <span class="ms-2 text-white px-3" style="background-color: ${status.color};border-radius: 20px; height: fit-content;">${status.text}</span>
+                            <button class="btn ms-auto">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_3715_762)"><path d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM15.59 7L12 10.59L8.41 7L7 8.41L10.59 12L7 15.59L8.41 17L12 13.41L15.59 17L17 15.59L13.41 12L17 8.41L15.59 7Z" fill="#2D3748"/></g><defs><clipPath id="clip0_3715_762"><rect width="24" height="24" fill="white"/></clipPath></defs></svg>
+                            </button>
+                        </div>
+                        <div>
+                            <span class="me-2">${res.code} ${res.version}</span> | 
+                            <span class="mx-2">${res.days.length} days (${(res.trainingTime / 60).toFixed(1)} hours)</span> |
+                            <span class="ms-2">Modified on ${res.modifiedOn} by ${res.modifiedBy}</span>
+                        </div>
+                    </li>
+                    `;
+                        window.selectedSyllabusList.push(selectedSyllabusId);
+                        $("#selected-syllabus-list").append(newEntry);
+                        updateProgramDayAndDuration();  
+                    }); 
+            }
+            $("#search-syllabus-dialog")[0].close();
+        });
+        $("#program-previous-button").click((e)=>{
+            $("#training-program-page-header").empty();
+            $("#training-program-page-header").append(`<h1>New Training Program</h1>`);
+            $("#training-program-name-form-container").removeClass("d-none");
+            $("#add-syllabuses-to-program-section").addClass("d-none");
+        });
+        $("#program-cancel-button").click((e)=>{
+            window.location.href= "viewProgram.html";
+        });
+        $("#program-save-button").click((e)=>{
+            let model = {};
+            model.name = $("#training-program-name").val();
+            model.information = window.programInfo.getData();
+            model.syllabuses = window.selectedSyllabusList;
+            model.status = true;
+            addTrainingProgram(model)
+            .then(res=>{
+                Swal.fire({
+                    icon:'success',
+                    text:'Your training program has been successfully saved'
+                }).then(()=>{
+                    window.location.href = 'viewProgram.html';
+                })
+            })
+            .catch((err)=>{
+                Swal.fire({
+                    icon:'error',
+                    title:'There was an error saving your training program',
+                    text: err.responseJSON.error
+                });
+            });
+        });
+        $(document).on("click", ".selectable-syllabus-row", (e) => {
+            e.preventDefault();
+            if ($(e.currentTarget).hasClass("selected-syllabus-row") === false) {
+                $(".selecting-syllabus-row").removeClass("selecting-syllabus-row");
+                $(e.currentTarget).addClass("selecting-syllabus-row");
+                $("#add-syllabus-and-close-dialog").prop("disabled", false);
+            }
+        });
+        function getSyllabusData() {
+            $("#add-syllabus-and-close-dialog").prop("disabled", true);
+            let sortField;
+            let sortOrder;
+            if ($("#table-syllabus-data .sortable.sortable-desc").length !== 0) {
+                sortField = $("#table-syllabus-data .sortable.sortable-desc").attr(
+                    "data-col-name"
+                );
+                sortOrder = 0;
+            } else {
+                sortField = $("#table-syllabus-data .sortable.sortable-asc").attr(
+                    "data-col-name"
+                );
+                sortOrder = 1;
+            }
+            let dataPart = {
+                page: window.currentPage,
+                pageSize: $("#pagination-page-size").val(),
+                sortField: sortField,
+                sortOrder: sortOrder,
+                searchValues: [$('input#syllabus-search-input').val()]
+            }
+            getAllSyllabus(dataPart)
+                .then(response => {
+                    let tableData = [];
+                    response.syllabus.forEach((value, index) => {
+                        let elementArr = [];
+                        elementArr.push(value.id);
+                        elementArr.push(value.name);
+                        elementArr.push(value.code);
+                        elementArr.push(value.modifiedOn);
+                        elementArr.push(value.modifiedBy);
+                        elementArr.push(value.duration);
+                        elementArr.push(value.outputStandard.length > 3 ? value.outputStandard.slice(0, 3).join(";") : value.outputStandard.join(";"));
+                        tableData.push(elementArr);
+                    })
+                    fillTableWithData("table-syllabus-data", tableData);
+                    let totalPages = Math.ceil(response.totalCount / response.pageSize);
+                    generatePageNumbers(window.currentPage, totalPages)
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+        function fillTableWithData(tableID, data) {
+            let tbody = $("#" + tableID + " tbody");
+            tbody.empty();
+            data.forEach((element) => {
+                let tr = $("<tr></tr>").attr("data-syllabus-id", element[0]).addClass("selectable-syllabus-row");
+                if (window.selectedSyllabusList.includes(element[0])) {
+                    tr.addClass("selected-syllabus-row");
+                }
+                for (let i = 1; i < element.length; i++) {
+                    let td = $("<td></td>");
+                    td.html(element[i]);
+                    tr.append(td);
+                }
+                tbody.append(tr);
+            });
+        }
+        function generatePageNumbers(currentPage, totalPages) {
+            let pagesToShow = 5; // You can change this value to control the number of pages to show before and after the current page.
+            let pageNumbers = [];
+
+            if (totalPages <= pagesToShow) {
+                // If there are fewer pages than the desired number to show, display all pages.
+                for (let i = 1; i <= totalPages; i++) {
+                    pageNumbers.push(i);
+                }
+            } else {
+                // Calculate the range of pages to display around the current page.
+                let start = Math.max(1, currentPage - Math.floor(pagesToShow / 2));
+                let end = Math.min(totalPages, start + pagesToShow - 1);
+
+                if (end === totalPages) {
+                    // Adjust the start if we are at the end of the range.
+                    start = Math.max(1, end - pagesToShow + 1);
+                }
+
+                if (start > 1) {
+                    // Add ellipsis at the beginning if necessary.
+                    pageNumbers.push(1);
+                    if (start > 2) {
+                        pageNumbers.push("...");
+                    }
+                }
+
+                // Add the page numbers within the range.
+                for (let i = start; i <= end; i++) {
+                    pageNumbers.push(i);
+                }
+
+                if (end < totalPages) {
+                    // Add ellipsis at the end if necessary.
+                    if (end < totalPages - 1) {
+                        pageNumbers.push("...");
+                    }
+                    pageNumbers.push(totalPages);
+                }
+            }
+            let paginationContainer = $("#pagination");
+            paginationContainer.empty();
+            $.each(pageNumbers, function (index, value) {
+                let btn;
+                if (value !== "...") {
+                    btn = $("<button></button>")
+                        .text(value)
+                        .attr("data-page-number", value)
+                        .prop("class", "btn pagination-link")
+                        .on("click", function () {
+                            let pageNo = $(this).attr("data-page-number");
+                            window.currentPage = pageNo;
+                            getSyllabusData();
+                        });
+                    if (value == window.currentPage) {
+                        if ($(".active-page").length !== 0) {
+                            $(".active-page").removeClass("active-page");
+                        }
+                        btn.addClass("active-page");
+                    }
+                } else {
+                    btn = $("<span>...</span>");
+                }
+                paginationContainer.append(btn);
+            });
+        }
+        function updateProgramDayAndDuration() {
+            let days=0;
+            let duration = 0;
+            $("li.syllabus-list-entry").each((index, value) =>{
+                days+= parseInt($(value).attr("data-syllabus-days"));
+                duration+=parseInt($(value).attr("data-syllabus-duration"));
+            });
+            $("#program-day-number").text(days);
+            $("#program-hour-number").text((duration/60).toFixed(1));
+        }
+    </script>
+    <script src="component/header.js"></script>
+    <script src="component/footer.js"></script>
+    <script src="component/navbar.js"></script>
+
+
+    <script src="js/default.js" type="module"></script>
+</body>
+
+</html>

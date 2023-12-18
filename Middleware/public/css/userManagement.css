@@ -1,0 +1,93 @@
+#filter-option-dialog {
+    border-radius: 10px;
+    border: none;
+}
+
+#add-user-dialog {
+    min-width: 500px;
+    border-radius: 10px;
+    border: none;
+    overflow-x: hidden;
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+span.selection {
+    display: block;
+    height: 40px;
+}
+
+.form-check {
+    display: flex;
+    align-items: baseline;
+}
+
+.checkbox-lg .form-check-input {
+    top: .8rem;
+    scale: 1.4;
+    margin-right: 0.7rem;
+}
+
+.checkbox-lg .form-check-label {
+    padding-top: 13px;
+}
+
+.active-page:hover {
+    background-color: #bfbfbf;
+}
+
+dialog {
+    min-width: 500px;
+    max-width: 50%;
+    scale: 0.75;
+    opacity: 0;
+    transition: scale 0.15s ease-in-out, opacity 0.15s ease-in-out;
+}
+
+dialog.show-dialog {
+    opacity: 1;
+    scale: 1;
+}
+
+td:nth-child(2) {
+    font-weight: bold;
+}
+
+
+.user-type-admin {
+    border-radius: 100px;
+    background-color: #1a6117;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+}
+
+.user-type-class-admin {
+    border-radius: 100px;
+    background-color: #4DB848;
+    text-wrap: nowrap;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+}
+
+.user-type-trainer {
+    background-color: #2D3748;
+    color: white;
+    border-radius: 100px;
+    border: none;
+    padding: 5px 10px;
+}
+
+.dropdown-item {
+    color: #2C5282;
+}
+
+#user-popup-menu-change-role-sub-menu {
+    min-width: fit-content !important;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}

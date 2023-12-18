@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/DataTable/jquery.dataTables.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/dataTable.css">
+    <link rel="stylesheet" href="css/default.css" />
+    <link rel="stylesheet" href="css/viewprogram.css" />
+    <title>Detail Program</title>
+
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+</head>
+
+<body>
+    <div class="loading-backdrop" id="loadingBackdrop">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" id="main-page-header">
+        </header>
+        <div class="d-flex flex-grow-1 flex-row">
+            <div class="" style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <div class="flex-grow-1">
+                <div style="background-color:#2D3748; color: #FFFFFF; padding: 10px; border-top: 1px solid #fff;">
+                    <h3 style="letter-spacing: 10px; margin-left: 20px;">Training Program</h3>
+                    <div style="display: flex; align-items: center; justify-content: flex-start; margin-left: 20px;">
+                        <h1 id="nameProgram" style="letter-spacing: 10px;"></h1>
+                        <div style="border-style: solid; border-radius: 25px; padding: 5px 10px; margin-left: 10px;"
+                            id="statusProgram"></div>
+                    </div>
+                </div>
+                <div style="border-bottom-style: solid; padding: 10px; margin-left: 20px;">
+                    <div id="durationTime">
+                    </div>
+                    <div id="createTime">
+                    </div>
+                </div>
+                <h3 style="padding: 10px; margin-left: 20px;">
+                    General Infomation
+                </h3>
+                <div style="border-style: solid; border-radius: 25px; padding: 10px; margin-left: 20px;">
+                    <div id="infoProgram"></div>
+                </div>
+                <h3 style="margin-left: 20px; padding: 10px;">
+                    Content
+                </h3>
+                <div id="tableContainer"></div>
+            </div>
+        </div>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+    </dialog>
+    <script type="module">
+        
+    </script>
+    <script src="component/footer.js"></script>
+    <script src="component/header.js"></script>
+    <script src="component/navbar.js"></script>
+
+    <script src="js/trainingProgramDetail.js" type="module"></script>
+    <script src="js/default.js" type="module"></script>
+</body>
+
+</html>

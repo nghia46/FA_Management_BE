@@ -1,0 +1,278 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/DataTable/jquery.dataTables.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/dataTable.css">
+    <link rel="stylesheet" href="css/default.css" />
+    <link rel="stylesheet" href="css/viewprogram.css"/>
+    <title>View Class</title>
+    
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+</head>
+<body>
+    <div class="loading-backdrop" id="loadingBackdrop">
+        <div class="loading-spinner"></div>
+      </div>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" style="overflow: hidden;" id="main-page-header">
+        </header>
+        <div class="d-flex flex-grow-1 flex-row">
+            <div class="" style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <div class="flex-grow-1 px-1">
+                <h1>View Class</h1>
+                <div class="row mb-3 mx-0 mt-0">
+                    <div class="col">
+                        <form id="search-form">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="text-input-search-value" name="searchValue"
+                                    placeholder="Search by">
+                                <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                <button class="btn btn-outline-secondary btn-dark text-light" type="button"
+                                    id="open-filter-dialog-button">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_487_2415)">
+                                            <path d="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"
+                                                fill="#DFDEDE" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_487_2415">
+                                                <rect width="24" height="24" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                    Filter
+                                </button>
+                            </div>
+                            <form id="search-form"></form>
+                    </div>
+                    <div class="col text-end">
+                        
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="user-information-table" class="table">
+                        <thead class="table-dark">
+                            <th>Class</th>
+                            <th>Classs Code</th>
+                            <th>Create On</th>
+                            <th>Create By</th>
+                            <th>Duration</th>
+                            <th>Attendee</th>
+                            <th>Location</th>
+                            <th>FSU</th>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+    <dialog id="filter-option-dialog">
+        <form id="filter-form">
+            <div class="row">
+                <div class="col-12 mb-3">
+                    <fieldset>
+                        <legend>
+                            <h5>
+                                Duration 
+                            </h5>
+                        </legend>
+                        <div class="d-flex flex-row align-middle">
+                            <label for="filter-start-date" class="form-label fs-5 m-auto px-1">from</label>
+                            <input type="date" id="filter-start-date" class="form-control" name="startDate">
+                            <label for="filter-end-date" class="form-label fs-5 m-auto px-1">to</label>
+                            <input type="date" name="endDate" id="filter-end-date" class="form-control">
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-6 mb-3 d-flex flex-row">
+                    <div class="me-4 my-3">
+                        <h5>Status</h5>
+                    </div>
+                    <div>
+                        <div class="form-check checkbox-lg">
+                            <input class="form-check-input" type="checkbox" value="Male" id="check-gender-male"
+                                name="genderList">
+                            <label class="form-check-label fs-5" for="check-gender-male">
+                                Active
+                            </label>
+                        </div>
+                        <div class="form-check checkbox-lg">
+                            <input class="form-check-input" type="checkbox" value="Female" id="check-gender-female"
+                                name="genderList">
+                            <label class="form-check-label fs-5" for="check-gender-female">
+                                Inactive
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <input class="btn btn-danger mx-1 me-auto" type="button" id="cancel-filter-option-dialog-button"
+                        value="Cancel">
+                    <input class="btn btn-secondary mx-1" type="reset" id="reset-filter-option-dialog-button">
+                    <input class="btn btn-primary mx-1" type="submit" name="btAction"
+                        id="submit-filter-option-dialog-button">
+                </div>
+            </div>
+        </form>
+    </dialog>
+    <script>
+        var navWidth;
+        var closeNavWidth;
+        $(document).ready(function () {
+            var mainNavMenu = $("#main-navigation-menu");
+            navWidth = mainNavMenu.outerWidth(true);
+            $("#main-navigation-menu").css("width", navWidth);
+            closeNavWidth = $("#btn-nav-toggle").outerWidth(true) + navWidth - mainNavMenu.width();
+            $("#btn-nav-toggle-open-icon").css("opacity", "0.5");
+            $("#btn-nav-toggle-open-icon").css("transform", "rotate(-45deg)");
+        });
+        $("#btn-nav-toggle").click(function () {
+            $(this).prop("disabled",true);
+            if ($(".nav-collapsed").length === 0) {
+                collapseNavbar();
+            } else {
+                expandNavbar();
+            }
+            setTimeout(() => {
+                $(this).prop("disabled",false);
+            }, 150);
+        });
+        $(".btn-nav").click(function () {
+            $(this).prop("disabled",true);
+            if ($(".nav-collapsed").length !== 0) {
+                expandNavbar();
+            }
+            setTimeout(() => {
+                $(this).prop("disabled",false);
+            }, 150);
+        });
+        function expandNavbar() {
+            $(".nav-collapsed").removeClass("nav-collapsed");
+            $(".nav-text").removeClass("hide");
+            $(".nav-dropdown").removeClass("hide");
+            $("#main-navigation-menu").animate({ width: navWidth }, 150, function () {
+            });
+            $("#btn-nav-toggle-open-icon").animate(
+                {
+                    opacity: 0.5,
+                    angle: -45
+                },
+                {
+                    duration: 75,
+                    step: function (now, fx) {
+                        if (fx.prop === "angle") {
+                            $(this).css("transform", "rotate(" + now + "deg)");
+                        } else {
+                            $(this).css("opacity", now);
+                        }
+                    },
+                    complete: function () {
+                        $("#btn-nav-toggle-open-icon").addClass("hide");
+                        $("#btn-nav-toggle-close-icon").removeClass("hide");
+                        $("#btn-nav-toggle-close-icon").animate(
+                            {
+                                opacity: 1,
+                                angle: 0
+    
+                            },
+                            {
+                                duration: 75,
+                                step: function (now, fx) {
+                                    if (fx.prop === "angle") {
+                                        $(this).css("transform", "rotate(" + now + "deg)");
+                                    } else {
+                                        $(this).css("opacity", now);
+                                    }
+                                }
+                            }
+                        );
+                    }
+                });
+        }
+        function collapseNavbar() {
+            $("#main-navigation-menu").addClass("nav-collapsed");
+            $(".collapse.show").removeClass("show");
+            $(".nav-dropdown-open").removeClass("nav-dropdown-open");
+            $("#main-navigation-menu").animate({ width: closeNavWidth }, 150, function () {
+                $(".nav-text").addClass("hide");
+                $(".nav-dropdown").addClass("hide");
+            });
+            $("#btn-nav-toggle-close-icon").animate(
+                {
+                    opacity: 0.5,
+                    angle: 45
+                },
+                {
+                    duration: 75,
+                    step: function (now, fx) {
+                        if (fx.prop === "angle") {
+                            $(this).css("transform", "rotate(" + now + "deg)");
+                        } else {
+                            $(this).css("opacity", now);
+                        }
+                    },
+                    complete: function () {
+                        $("#btn-nav-toggle-close-icon").addClass("hide");
+                        $("#btn-nav-toggle-open-icon").removeClass("hide");
+                        $("#btn-nav-toggle-open-icon").animate(
+                            {
+                                opacity: 1,
+                                angle: 0
+                            },
+                            {
+                                duration: 75,
+                                step: function (now, fx) {
+                                    if (fx.prop === "angle") {
+                                        $(this).css("transform", "rotate(" + now + "deg)");
+                                    } else {
+                                        $(this).css("opacity", now);
+                                    }
+                                }
+                            }
+                        );
+                    }
+                }
+            );
+        }
+        $(".btn-nav").click(function () {
+            $(this).prop("disabled",true);
+            let dropdown = $(this).find(".nav-dropdown");
+            $(".btn-active").removeClass("btn-active");
+            $(this).addClass("btn-active");
+            if (dropdown.length !== 0) {
+                dropdown.toggleClass("nav-dropdown-open");
+                $(this).next(".collapsing").children(".btn-nav-sub:first-child").addClass("btn-active");
+            }
+            setTimeout(() => {
+                $(this).prop("disabled",false);
+            }, 150);
+        });
+        $(".btn-nav-sub").click(function () {
+            $(this).prop("disabled",true);
+            $(".btn-active").removeClass("btn-active");
+            $(this).addClass("btn-active");
+            $(this).parent(".collapse").prev(".btn-nav").addClass("btn-active");
+            setTimeout(() => {
+                $(this).prop("disabled",false);
+            }, 150);
+        });
+    </script>
+    <script src="component/footer.js"></script>
+    <script src="component/header.js"></script>
+    <script src="component/navbar.js"></script>
+
+    <script src="js/class.js" type="module"></script>
+    <script src="js/default.js" type="module"></script>
+</body>
+</html>

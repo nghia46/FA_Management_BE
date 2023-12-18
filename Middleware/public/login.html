@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login form</title>
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <style>
+    #otp-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 0px 0;
+    }
+
+    h1 {
+      font-weight: 700;
+      letter-spacing: -1.5px;
+      margin: 0;
+      margin-top: 26px;
+    }
+
+    .form-control {
+      display: flex;
+      align-items: center;
+      margin-bottom: -1px;
+    }
+
+    .register-container form {
+      width: auto;
+    }
+
+    .register-container form div.form-control {
+      margin-bottom: -8px;
+    }
+
+    .form-control label {
+      display: inline-block;
+      width: 100px;
+    }
+
+    .register-container form {
+      margin: auto;
+    }
+
+    .form-control input {
+      width: 100%;
+    }
+
+    .social-container {
+      max-width: 300px;
+    }
+
+    .form-control-geneder {
+      display: flex;
+      margin-top: 1rem;
+    }
+
+    .form-control-geneder label {
+      margin-right: 12px;
+    }
+
+    .form-control-geneder input {
+      margin-right: 2px;
+      margin-top: 6px;
+    }
+
+    .form-control-geneder .gender {
+      margin-right: 70px;
+    }
+
+    #dob {
+      margin-top: 0px;
+      padding-top: 15px;
+    }
+
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type='number'] {
+      -moz-appearance: textfield;
+      /* Firefox */
+    }
+  </style>
+</head>
+
+<body style="height: 100vh!important;">
+  <div class="loading-backdrop" id="loadingBackdrop">
+    <div class="loading-spinner"></div>
+  </div>
+  <div class="container" id="container">
+    <div class="form-container register-container">
+      <form>
+        <h1>Register Here</h1>
+        <div class="form-control">
+          <input type="text" id="username" placeholder="Name" />
+          <small id="username-error"></small>
+          <span></span>
+        </div>
+        <div class="form-control">
+          <input type="email" id="email" placeholder="Email" />
+          <small id="email-error"></small>
+          <span></span>
+        </div>
+        <div class="form-control">
+          <input type="password" id="password" placeholder="Password" />
+          <small id="password-error"></small>
+          <span></span>
+        </div>
+        <div class="form-control">
+          <input type="password" id="password-confirm" placeholder="Confirm Password" />
+          <small id="passwordConfirm-error"></small>
+          <span></span>
+        </div>
+        <div class="form-control">
+          <input type="number" id="phone" placeholder="Phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required>
+          <button id="sendOtp" type="button">Send OTP</button>
+          <small id="phone-error"></small>
+          <span></span>
+        </div>
+        <div class="form-control" id="otp-container" style="display: none;">
+          <input type="number" class="otp-field" id="otp1" min="0" max="9" autofocus
+            oninput="limitToOneDigit(this); moveToNextInput(this, 'otp2');"
+            onkeydown="focusPreviousInput(this, 'otp1')">
+          <input type="number" class="otp-field" id="otp2" min="0" max="9" autofocus
+            oninput="limitToOneDigit(this); moveToNextInput(this, 'otp3', 'otp1');"
+            onkeydown="focusPreviousInput(this, 'otp1')">
+          <input type="number" class="otp-field" id="otp3" min="0" max="9" autofocus
+            oninput="limitToOneDigit(this); moveToNextInput(this, 'otp4', 'otp2');"
+            onkeydown="focusPreviousInput(this, 'otp2')">
+          <input type="number" class="otp-field" id="otp4" min="0" max="9" autofocus
+            oninput="limitToOneDigit(this); moveToNextInput(this, 'otp5', 'otp3');"
+            onkeydown="focusPreviousInput(this, 'otp3')">
+          <input type="number" class="otp-field" id="otp5" min="0" max="9" autofocus
+            oninput="limitToOneDigit(this); moveToNextInput(this, 'otp6', 'otp4');"
+            onkeydown="focusPreviousInput(this, 'otp4')">
+          <input type="number" class="otp-field" id="otp6" min="0" max="9" autofocus
+            oninput="limitToOneDigit(this); moveToNextInput(this, 'otp6', 'otp5');"
+            onkeydown="focusPreviousInput(this, 'otp5')">
+          <button id="verifyOtp" type="button">Verify</button>
+          <small id="verify"></small>
+          <span></span>
+        </div>
+        <div class="form-control">
+          <input type="date" id="dob" min="1990-12-31" max="2050-12-30" placeholder="Date of Birth" />
+          <small id="dob-error"></small>
+          <span></span>
+        </div>
+        <div class="form-control-geneder">
+          <label class="gender" for="gender">Gender:</label>
+          <input type="radio" id="male" name="gender" value="true" checked>
+          <label for="male">Male</label>
+          <input type="radio" id="female" name="gender" value="false">
+          <label for="female">Female</label>
+        </div>
+        <button id="userRegister" type="submit" value="submit">Register</button>
+      </form>
+    </div>
+
+    <div class="form-container login-container">
+      <form class="form-lg" id="loginForm">
+        <h1>Login Here</h1>
+        <div class="form-control2">
+          <input type="text" class="email-2" id="userNameInput" placeholder="Email" />
+          <small class="email-error-2"></small>
+          <span></span>
+        </div>
+        <div class="form-control2">
+          <i class="fa-solid fa-eye-slash fa-sm password-toggle " id="togglePasswordSlash"></i>
+          <i class="fa-solid fa-eye fa-sm password-toggle " id="togglePassword" style="display: none;"></i>
+          <input type="password" class="password-2" id="passwordInput" placeholder="Password" />
+
+          <small class="password-error-2"></small>
+          <span></span>
+        </div>
+
+        <div class="content">
+          <div class="checkbox">
+            <input type="checkbox" name="checkbox" id="checkbox" />
+            <label for="">Remember me</label>
+          </div>
+          <div class="pass-link">
+            <a href="forgotPassword.html">Forgot password</a>
+          </div>
+        </div>
+        <!--Fix-->
+        <button type="submit" value="submit" id="buttonLogin">Login</button>
+        <span>Or use your account</span>
+        <div class="social-container">
+          <div id="signInDiv"></div>
+        </div>
+      </form>
+    </div>
+
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1 class="title">
+            Hello <br />
+            <img style="width: 100%;"
+              src="https://fpt.com/-/media/project/fpt-corporation/fpt/common/images/navigation/logo/fpt-logo.svg">
+
+          </h1>
+          <p>If you have an account, login here and have fun</p>
+          <button class="ghost" id="login">
+            Login
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+        </div>
+
+        <div class="overlay-panel overlay-right">
+          <h1 class="title">
+            <img style="width: 100%;"
+              src="https://fpt.com/-/media/project/fpt-corporation/fpt/common/images/navigation/logo/fpt-logo.svg">
+          </h1>
+          <p>
+            If you don'n have an account yet, join us and start your journey
+          </p>
+          <button class="ghost" id="register">
+            Register
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  function limitToOneDigit(inputField) {
+    if (inputField.value > 9) {
+      inputField.value = 9;
+    }
+  }
+  function moveToNextInput(inputField, nextInputId, previousInputId) {
+    if (inputField.value && inputField.value.length === 1) {
+      const nextInput = document.getElementById(nextInputId);
+      if (nextInput) {
+        nextInput.focus();
+      }
+    }
+  }
+  function focusPreviousInput(inputField, previousInputId) {
+    if (inputField.value === "" && event.key === "Backspace") {
+      const previousInput = document.getElementById(previousInputId);
+      if (previousInput) {
+        previousInput.focus();
+      }
+    }
+  }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="js/login.js"></script>
+<script type="module" src="js/loginUser.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+<script>
+</script>
+
+</html>

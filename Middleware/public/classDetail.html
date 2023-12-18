@@ -1,0 +1,288 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="css/DataTable/jquery.dataTables.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/dataTable.css">
+    <link rel="stylesheet" href="css/default.css" />
+    <link rel="stylesheet" href="css/viewprogram.css" />
+    <title>Class Detail</title>
+
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+</head>
+
+<body>
+    <div class="loading-backdrop" id="loadingBackdrop">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" style="overflow: hidden;" id="main-page-header">
+        </header>
+        <div class="d-flex flex-grow-1 flex-row">
+            <div class="" style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <div class="flex-grow-1">
+                <div style="background-color:#2D3748; color: #FFFFFF; padding: 10px; border-top: 1px solid #fff;">
+                    <h3 style="letter-spacing: 10px; margin-left: 20px;">Class</h3>
+                    <div style="display: flex; align-items: center; justify-content: flex-start; margin-left: 20px;">
+                        <h1 id="nameClass" style="letter-spacing: 10px;"></h1>
+                        <div style="border-style: solid; border-radius: 25px; padding: 5px 10px; margin-left: 10px;"
+                            id="statusClass"></div>
+                    </div>
+                    <div id="classCode" style="margin-left: 20px;"></div>
+                    <div
+                        style="border-top-style: solid; padding: 10px; margin-left: 20px; margin-top: 10px; display: flex;">
+                        <div id="durationTimeDays"> 31 days
+                        </div>
+                        <div id="durationTimeHours" style="margin-left: 10px; font-style: italic;"> (97 hours)
+                        </div>
+                    </div>
+                </div>
+                <div class="row mx-0">
+                    <div class="col-4">
+                        <p>
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
+                                aria-expanded="false" aria-controls="collapseExample">
+                                General
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Class Time</th>
+                                            <td id="classTime"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Location</th>
+                                            <td id="location"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Trainer</th>
+                                            <td id="trainerName"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Admin</th>
+                                            <td id="adminName"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>FSU</th>
+                                            <td id="fsu"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Created</th>
+                                            <td id="createdBy"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Review</th>
+                                            <td>Comming soon</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Approve</th>
+                                            <td>Comming soon</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <table class="table caption-top table-borderless" style="text-align: center;">
+                            <caption
+                                style="background-color: #2D3748; padding-left: 20px; color: #FFFFFF; border-radius: 25px 25px 0 0;"
+                                id="attendeeName">
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th style="background-color: #2D3748; color: #fff;">Planned</th>
+                                    <th style="color: #fff; background-color: #285D9A;">Accepted</th>
+                                    <th style="background-color: bisque;">Actual</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="planned"
+                                        style="background-color: #2D3748; color: #fff; border-radius: 0 0 0 25px;"></td>
+                                    <td id="accepted" style="color: #fff; background-color: #285D9A;"></td>
+                                    <td id="actual" style="border-radius: 0 0 25px 0; background-color: bisque"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-8">
+                        <p>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseExample1" aria-expanded="false"
+                                aria-controls="collapseExample1">
+                                Time Frame
+                            </button>
+                        </p>
+                        <div class="collapse" id="collapseExample1">
+                            <div class="card card-body">
+                                Some placeholder content for the collapse component. This panel is hidden by default but
+                                revealed when the user activates the relevant trigger.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+    </dialog>
+    <script>
+        var navWidth;
+        var closeNavWidth;
+        $(document).ready(function () {
+            var mainNavMenu = $("#main-navigation-menu");
+            navWidth = mainNavMenu.outerWidth(true);
+            $("#main-navigation-menu").css("width", navWidth);
+            closeNavWidth = $("#btn-nav-toggle").outerWidth(true) + navWidth - mainNavMenu.width();
+            $("#btn-nav-toggle-open-icon").css("opacity", "0.5");
+            $("#btn-nav-toggle-open-icon").css("transform", "rotate(-45deg)");
+        });
+        $("#btn-nav-toggle").click(function () {
+            $(this).prop("disabled", true);
+            if ($(".nav-collapsed").length === 0) {
+                collapseNavbar();
+            } else {
+                expandNavbar();
+            }
+            setTimeout(() => {
+                $(this).prop("disabled", false);
+            }, 150);
+        });
+        $(".btn-nav").click(function () {
+            $(this).prop("disabled", true);
+            if ($(".nav-collapsed").length !== 0) {
+                expandNavbar();
+            }
+            setTimeout(() => {
+                $(this).prop("disabled", false);
+            }, 150);
+        });
+        function expandNavbar() {
+            $(".nav-collapsed").removeClass("nav-collapsed");
+            $(".nav-text").removeClass("hide");
+            $(".nav-dropdown").removeClass("hide");
+            $("#main-navigation-menu").animate({ width: navWidth }, 150, function () {
+            });
+            $("#btn-nav-toggle-open-icon").animate(
+                {
+                    opacity: 0.5,
+                    angle: -45
+                },
+                {
+                    duration: 75,
+                    step: function (now, fx) {
+                        if (fx.prop === "angle") {
+                            $(this).css("transform", "rotate(" + now + "deg)");
+                        } else {
+                            $(this).css("opacity", now);
+                        }
+                    },
+                    complete: function () {
+                        $("#btn-nav-toggle-open-icon").addClass("hide");
+                        $("#btn-nav-toggle-close-icon").removeClass("hide");
+                        $("#btn-nav-toggle-close-icon").animate(
+                            {
+                                opacity: 1,
+                                angle: 0
+
+                            },
+                            {
+                                duration: 75,
+                                step: function (now, fx) {
+                                    if (fx.prop === "angle") {
+                                        $(this).css("transform", "rotate(" + now + "deg)");
+                                    } else {
+                                        $(this).css("opacity", now);
+                                    }
+                                }
+                            }
+                        );
+                    }
+                });
+        }
+        function collapseNavbar() {
+            $("#main-navigation-menu").addClass("nav-collapsed");
+            $(".collapse.show").removeClass("show");
+            $(".nav-dropdown-open").removeClass("nav-dropdown-open");
+            $("#main-navigation-menu").animate({ width: closeNavWidth }, 150, function () {
+                $(".nav-text").addClass("hide");
+                $(".nav-dropdown").addClass("hide");
+            });
+            $("#btn-nav-toggle-close-icon").animate(
+                {
+                    opacity: 0.5,
+                    angle: 45
+                },
+                {
+                    duration: 75,
+                    step: function (now, fx) {
+                        if (fx.prop === "angle") {
+                            $(this).css("transform", "rotate(" + now + "deg)");
+                        } else {
+                            $(this).css("opacity", now);
+                        }
+                    },
+                    complete: function () {
+                        $("#btn-nav-toggle-close-icon").addClass("hide");
+                        $("#btn-nav-toggle-open-icon").removeClass("hide");
+                        $("#btn-nav-toggle-open-icon").animate(
+                            {
+                                opacity: 1,
+                                angle: 0
+                            },
+                            {
+                                duration: 75,
+                                step: function (now, fx) {
+                                    if (fx.prop === "angle") {
+                                        $(this).css("transform", "rotate(" + now + "deg)");
+                                    } else {
+                                        $(this).css("opacity", now);
+                                    }
+                                }
+                            }
+                        );
+                    }
+                }
+            );
+        }
+        $(".btn-nav").click(function () {
+            $(this).prop("disabled", true);
+            let dropdown = $(this).find(".nav-dropdown");
+            $(".btn-active").removeClass("btn-active");
+            $(this).addClass("btn-active");
+            if (dropdown.length !== 0) {
+                dropdown.toggleClass("nav-dropdown-open");
+                $(this).next(".collapsing").children(".btn-nav-sub:first-child").addClass("btn-active");
+            }
+            setTimeout(() => {
+                $(this).prop("disabled", false);
+            }, 150);
+        });
+        $(".btn-nav-sub").click(function () {
+            $(this).prop("disabled", true);
+            $(".btn-active").removeClass("btn-active");
+            $(this).addClass("btn-active");
+            $(this).parent(".collapse").prev(".btn-nav").addClass("btn-active");
+            setTimeout(() => {
+                $(this).prop("disabled", false);
+            }, 150);
+        });
+    </script>
+    <script src="component/footer.js"></script>
+    <script src="component/header.js"></script>
+    <script src="component/navbar.js"></script>
+
+    <script src="js/classDetail.js" type="module"></script>
+    <script src="js/default.js" type="module"></script>
+</body>
+
+</html>

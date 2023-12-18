@@ -1,0 +1,359 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/SweetAlert2/sweetalert2.min.css">
+    <link rel="icon" href="img/uniGate_logo.png" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="css/createSyllabus.css"> -->
+    <title>Create syllabus</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <style>
+        .tab {
+            border-radius: 20px 20px 0px 0px;
+            border: 1px solid #FFF;
+            background: #6D7684;
+            width: 200px;
+            height: 30px;
+            text-align: center;
+            cursor: pointer;
+            color: #FFF;
+        }
+
+        @keyframes progress-bar-stripes {
+            0% {
+                background-position-x: -1rem;
+            }
+        }
+
+        #syllabus-day-list::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        /* Track */
+        #syllabus-day-list::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        #syllabus-day-list::-webkit-scrollbar-thumb {
+            background: orange;
+        }
+
+        /* Handle on hover */
+        #syllabus-day-list::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" id="main-page-header">
+
+        </header>
+        <main class="d-flex flex-grow-1 mb-1">
+            <div style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <div id="create-syllabus" class="flex-grow-1 mx-2 px-1 overflow-x-hidden">
+                <div class="d-flex flex-row mt-4 pb-4 border-bottom border-2 border-black">
+                    <p class="my-auto fw-bold fs-3 me-4">Syllabus</p>
+                    <div id="progress">
+                        <div class="progress" style="width: 300px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" style="width: 16px;
+                            height: 16px;
+                            transform: translateX(-7px);" viewBox="0 0 12 12" fill="none">
+                                <rect width="12" height="12" rx="6" fill="#2D3748" />
+                                <circle cx="6" cy="6" r="4" fill="white" />
+                            </svg>
+                        </div>
+                        <div class="progress-label row mx-2">
+                            <div class="col">General</div>
+                            <div class="col">Outline</div>
+                            <div class="col">Other</div>
+                            <div class="col">Done</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="basic-info" class="row my-3">
+                    <div class="col-6">
+                        <label for="syllabus-name" class="fw-bold">Syllabus Name<span
+                                style="color: red;">*</span></label>
+                        <input id="syllabus-name" class="form-control" type="text" name="syllabusName"
+                            placeholder="Enter name here" required />
+                        <div id="syllabus-name-feedback" class="invalid-feedback"></div>
+                    </div>
+                    <div class="col-3">
+                        <label for="syllabus-code" class="fw-bold">Syllabus Code<span
+                                style="color: red;">*</span></label>
+                        <input id="syllabus-code" class="form-control" type="text" name="code"
+                            placeholder="Enter code here" maxlength="3" />
+                        <div id="syllabus-code-feedback" class="invalid-feedback"></div>
+                    </div>
+                    <div class=" col-3">
+                        <label for="syllabus-version" class="fw-bold">Version<span style="color: red;">*</span></label>
+                        <input id="syllabus-version" class="form-control" type="text" name="version"
+                            placeholder="1.0" />
+                        <div id="syllabus-version-feedback" class="invalid-feedback"></div>
+                    </div>
+
+                </div>
+                <div class="syllabus-detail">
+                    <div class="syllabus-tab d-flex mb-3 border-dark border-2 border-bottom">
+                        <a href="#general">
+                            <div class="tab active">General</div>
+                        </a>
+                        <a href="#outline">
+                            <div id="syllabus-tab-2" class="tab">Outline</div>
+                        </a>
+                        <a href="#others">
+                            <div class="tab">Others</div>
+                        </a>
+                    </div>
+                    <div id="content-1" class="content">
+                        <div id="knowledge-req" class="row">
+                            <div class="knowledge-textbox col-6 mb-3">
+                                <label for="syllabus-level" class="fw-bold">Level<span
+                                        style="color: red;">*</span></label>
+                                <select id="syllabus-level" name="syllabusLevel" class="form-select" required>
+                                    <option value="0">Low</option>
+                                    <option value="1">Medium</option>
+                                    <option value="2">High</option>
+                                </select>
+                            </div>
+                            <div class="knowledge-textbox col-6 mb-3">
+                                <label for="attendee-number" class="fw-bold">Attendee Number<span
+                                        style="color: red;">*</span></label>
+                                <input class="form-control" type="number" name="attendeeNumber" id="attendee-number"
+                                    min="1">
+                                <div id="syllabus-attendeeno-feedback" class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div id="technical-req" class="col-12 mb-3">
+                            <label for="technical-requirement-textarea" class="fw-bold">Technical Requirement(s)</label>
+                            <textarea class="form-control" name="technical-requirement"
+                                id="technical-requirement-textarea" rows="5"></textarea>
+                        </div>
+                        <div class="course-objective col-12 mb-3">
+                            <label for="course-objective-input" class="fw-bold">Course objectives</label>
+                            <textarea class="form-control" name="courseObjective" id="course-objective-input"
+                                rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div id="content-2" class="content d-none">
+                    </div>
+                    <div id="content-3" class="content d-none">
+                        <div class="row">
+                            <div class="other-first-row col-12 col-lg-4">
+                                <div class="card">
+                                    <div class="card-header bg-secondary text-white">
+                                        Time Allocation
+                                    </div>
+                                    <div class="time-chart row card-body" style="aspect-ratio: 2 / 1;">
+                                        <canvas id="chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="assessment card col-12 col-lg-8 ps-lg-0">
+                                <div class="card-header bg-secondary text-white">
+                                    Assessment scheme
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <div class="flex-grow-1">
+                                        <ul id="assessment-scheme-list" style="list-style-type: none; padding-left: 0;">
+
+
+                                            <li id="add-new-assessment-entry">
+                                                <button id="add-assessment-btn" class="btn btn-primary">New assessment
+                                                    scheme</button>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex-shrink-1 input-group">
+                                        <span class="input-group-text">Passing GPA</span>
+                                        <input type="number" class="form-control" id="syllabus-passing-gpa" min="1"
+                                            max="100" step="1">
+                                        <span class="input-group-text">%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3">
+                                <div class="card">
+                                    <div class="card-header bg-secondary text-white">
+                                        Training delivery principle
+                                    </div>
+                                    <div class="card-body">
+                                        <textarea name="trainingDeliveryPrinciple" id="training-delivery-principle"
+                                            cols="30" rows="10"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="saving-btn text-end">
+                        <a class="previous-btn btn btn-outline-secondary">Previous</a>
+                        <button id="syllabus-cancel-button" class="btn-outline-danger btn">Cancel</button>
+                        <button id="syllabus-save-draft-button" class="save-draft-btn btn btn-secondary">Save as
+                            draft</button>
+                        <button id="syllabus-save-button" class="save-btn btn btn-primary">Save</input>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+        </footer>
+    </div>
+    <dialog id="upload-material-dialog" class="p-3">
+        <form method="dialog" id="upload-material-form">
+            <div class="fw-bold fs-4">What type you want to add?</div>
+            <div class="">
+                <label for="material-type-select">Material type:</label>
+                <select class="form-select" name="$type" id="material-type-select">
+                    <option value="Url">Url</option>
+                    <option value="File">File</option>
+                </select>
+            </div>
+            <div>
+                <label for="material-title" class="form-label">Title: </label>
+                <input id="material-title" name="materialTitle" class="form-control" type="text" required>
+                <div id="upload-type-link">
+                    <label for="link-material-url" class="form-label">Link: </label>
+                    <input name="materialUrl" id="link-material-url" class="form-control" type="text" required>
+                </div>
+                <div id="upload-type-file" class="d-none">
+                    <label for="upload-material-file" class="form-label">File: </label>
+                    <input name="materialFile" id="upload-material-file" class="form-control" type="file" required
+                        disabled>
+                </div>
+
+            </div>
+            <div class="upload-btn-row">
+                <input type="reset" class="btn btn-danger close-upload-material-dialog" value="Cancel">
+                <input type="submit" class="btn btn-dark" value="Upload">
+            </div>
+        </form>
+    </dialog>
+    <dialog id="add-content-dialog" class="p-0 overflow-x-hidden" style="border-radius: 10px;">
+        <table class="table m-0">
+            <thead class="table-dark">
+                <th class="text-center">
+                    <div class="d-flex flex-row align-items-center">
+                        <span class="flex-grow-1">
+                            New Content
+                        </span>
+                        <button class="btn close-add-lesson-dialog-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_46_6114)">
+                                    <path
+                                        d="M12 2C6.47 2 2 6.47 2 12C2 17.53 6.47 22 12 22C17.53 22 22 17.53 22 12C22 6.47 17.53 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM15.59 7L12 10.59L8.41 7L7 8.41L10.59 12L7 15.59L8.41 17L12 13.41L15.59 17L17 15.59L13.41 12L17 8.41L15.59 7Z"
+                                        fill="white" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_46_6114">
+                                        <rect width="24" height="24" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </div>
+                </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form id="add-content-form" method="dialog">
+                            <div class="mb-3 mt-3 row align-items-center">
+                                <label for="input-lesson-name"
+                                    class="form-label col-12 col-md-2 col-form-label">Name</label>
+                                <div class="col-12 col-md-10">
+                                    <input type="text" class="form-control form-text" id="input-lesson-name" name="name"
+                                        placeholder="Name of content..." required>
+                                    <div class="invalid-feedback" id="invalid-lesson-name"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row align-items-center">
+                                <label for="input-lesson-output-standard"
+                                    class="form-label col-12 col-md-2 col-form-label">Output standard</label>
+                                <div class="col-12 col-md-10">
+                                    <input type="text" class="form-control form-text" id="input-lesson-output-standard"
+                                        name="outputStandard" placeholder="Output Standard" required>
+                                </div>
+                            </div>
+                            <div class="mb-3 row align-items-center">
+                                <label for="input-lesson-training-time"
+                                    class="form-label col-12 col-md-2 col-form-label">Training Time</label>
+                                <div class="col-12 col-md-10">
+                                    <input type="number" class="form-control form-text" id="input-lesson-training-time"
+                                        name="trainingTime" placeholder="Minutes" required min="1">
+                                    <div class="invalid-feedback" id="invalid-lesson-training-time"></div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row align-items-center">
+                                <label for="select-lesson-delivery-type"
+                                    class="form-label col-12 col-md-2 col-form-label">Delivery Type</label>
+                                <div class="col-12 col-md-10 form-check form-switch ps-3 m-auto">
+                                    <select id="select-lesson-delivery-type" class="form-select" name="deliveryType">
+                                        <option value="0">Assignment/Lab</option>
+                                        <option value="1">Concept/Lecture</option>
+                                        <option value="2">Guide/Review</option>
+                                        <option value="3">Test/Quiz</option>
+                                        <option value="4">Exam</option>
+                                        <option value="5">Seminar/Workshop</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3 row align-items-end">
+                                <p class="form-label col-12 col-md-2 col-form-label">Method</p>
+                                <div class="col-12 col-md-10 form-check form-switch ps-3 m-auto">
+                                    <input type="checkbox" name="deliveryMethod" id="toggle-lesson-method"
+                                        class="form-check-input m-0 align-self-center" value="true" style="scale: 1.5;">
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <input type="reset" class="btn btn-outline-danger close-add-lesson-dialog-button"
+                                    value="Cancel">
+                                <input type="submit" name="btAction" class="btn btn-dark" value="Save">
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </dialog>
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+    <script>
+        $("#material-type-select").change(function (e) {
+            console.log($(this).val());
+            if ($(this).val() === "Url") {
+                $("#upload-type-file").addClass("d-none");
+                $("#upload-material-file").prop("disabled", true);
+                $("#upload-type-link").removeClass("d-none");
+                $("#link-material-url").prop("disabled", false);
+            } else {
+                $("#upload-type-file").removeClass("d-none");
+                $("#upload-material-file").prop("disabled", false);
+                $("#upload-type-link").addClass("d-none");
+                $("#link-material-url").prop("disabled", true);
+            }
+        });
+    </script>
+    <script src="component/footer.js"></script>
+    <script src="component/header.js"></script>
+    <script src="component/navbar.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="js/default.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="js/updateSyllabus.js" type="module"></script>
+    <script src="plugin/ckeditor/ckeditor.js"></script>
+</body>
+
+</html>

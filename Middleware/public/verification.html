@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/verification.css" />
+    <title>Verification Code</title>
+    <script src="./js/verification.js" type="module"></script>
+  </head>
+  <body style="height: 100vh !important">
+    <div class="loading-backdrop" id="loadingBackdrop">
+      <div class="loading-spinner"></div>
+    </div>
+    <div class="container">
+      <div class="header">Verification Code</div>
+      <div class="sub-header">
+        Verify code has been sent to your email
+        <span class="email-text"></span>, please check your email and enter the
+        code here
+      </div>
+      <div class="verification-code">
+        <input
+          type="number"
+          id="code1"
+          min="0"
+          max="9"
+          autofocus
+          oninput="limitToOneDigit(this); moveToNextInput(this, 'code2');"
+          onkeydown="focusPreviousInput(this, 'code1')"
+        />
+        <input
+          type="number"
+          id="code2"
+          min="0"
+          max="9"
+          oninput="limitToOneDigit(this); moveToNextInput(this, 'code3', 'code1');"
+          onkeydown="focusPreviousInput(this, 'code1')"
+        />
+        <input
+          type="number"
+          id="code3"
+          min="0"
+          max="9"
+          oninput="limitToOneDigit(this); moveToNextInput(this, 'code4', 'code2')"
+          onkeydown="focusPreviousInput(this, 'code2')"
+        />
+        <input
+          type="number"
+          id="code4"
+          min="0"
+          max="9"
+          oninput="limitToOneDigit(this); moveToNextInput(this, 'code5', 'code3')"
+          onkeydown="focusPreviousInput(this, 'code3')"
+        />
+        <input
+          type="number"
+          id="code5"
+          min="0"
+          max="9"
+          oninput="limitToOneDigit(this); moveToNextInput(this, 'code6', 'code4')"
+          onkeydown="focusPreviousInput(this, 'code4')"
+        />
+        <input
+          type="number"
+          id="code6"
+          min="0"
+          max="9"
+          oninput="limitToOneDigit(this); moveToNextInput(this, 'code6', 'code5')"
+          onkeydown="focusPreviousInput(this, 'code5')"
+        />
+      </div>
+
+      <div class="footer">
+        <div class="send-btn">
+          <button id="sendButton">Send</button>
+        </div>
+        <div class="re-send-btn">
+          <button id="reSendButton" style="display: none">Re-Send</button>
+        </div>
+        <div class="count-down">0</div>
+      </div>
+    </div>
+  </body>
+  <script>
+    function limitToOneDigit(inputField) {
+      if (inputField.value > 9) {
+        inputField.value = 9;
+      }
+    }
+    function moveToNextInput(inputField, nextInputId, previousInputId) {
+      if (inputField.value && inputField.value.length === 1) {
+        const nextInput = document.getElementById(nextInputId);
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    }
+    function focusPreviousInput(inputField, previousInputId) {
+      if (inputField.value === "" && event.key === "Backspace") {
+        const previousInput = document.getElementById(previousInputId);
+        if (previousInput) {
+          previousInput.focus();
+        }
+      }
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+</html>

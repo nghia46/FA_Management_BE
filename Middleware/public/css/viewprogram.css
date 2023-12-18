@@ -1,0 +1,101 @@
+#import-btn {
+    border-radius: 8px;
+    background: var(--orange, #D45B13);
+}
+#import-btn {
+    border-radius: 8px;
+    background: var(--orange, #D45B13);
+}
+
+        .bg-main {
+            background-color: #2d3748;
+        }
+        .collapsing {
+            transition-duration: 0.15s !important;
+        }
+        .btn-unigate {
+            background-color: #0b2136;
+            border-radius: 20%/50%;
+        }
+
+        .btn-nav.btn-active {
+            background-color: #2d3748 !important;
+            color: #ffffff !important;
+        }
+
+        .btn-nav.btn-active svg {
+            filter: brightness(500%);
+        }
+
+        .btn-nav-sub.btn-active {
+            background-color: #4f6181 !important;
+            color: #ffffff !important;
+        }
+
+        .btn-nav,
+        .btn-nav-sub {
+            text-align: left;
+            white-space: nowrap;
+            margin-bottom: 0.2rem;
+        }
+
+        .btn-nav-sub {
+            width: 85%;
+            padding-left: 2rem;
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+            padding-right: 0.2rem;
+            margin-left: 15%;
+            box-sizing: border-box;
+        }
+
+        .btn-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .btn-nav .nav-text {
+            margin-right: auto;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+
+        .btn-nav svg:first-child {
+            overflow: visible;
+        }
+
+        .hide {
+            display: none;
+            padding: 0px !important;
+            width: 0px !important;
+        }
+
+        .btn-nav .nav-dropdown {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .nav-dropdown-open {
+            transform: rotate(-90deg);
+        }
+
+        #main-navigation-menu {
+            overflow: hidden;
+            list-style-type: none;
+        }
+
+        #btn-nav-toggle {
+            width: initial;
+        }
+
+        .table .active {
+            font-weight: bold;
+            color: green; /* Màu chữ đậm khi active */
+        }
+        
+        .table .inactive {
+            color: #ccc; /* Màu chữ nhạt khi inactive */
+        }

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/Bootstrap 5/bootstrap.min.css" rel="stylesheet">
+    <link href="css/select2/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/default.css">
+    <link rel="stylesheet" href="css/SweetAlert2/sweetalert2.min.css">
+    <link rel="icon" href="img/uniGate_logo.png" type="image/x-icon">
+    <title>Profile</title>
+    <script src="js/JQuery/jquery-3.7.1.js"></script>
+    <script src="js/Bootstrap 5/bootstrap.bundle.min.js"></script>
+    <script src="js/SweetAlert2/sweetalert2.all.js"></script>
+</head>
+<style>
+    .container {
+        margin-top: 100px;
+        margin-left: 25%;
+        margin-right: 25%;
+        padding: auto;
+    }
+
+    .input-group-text {
+        border-radius: 8px 0 0 8px;
+        width: auto;
+    }
+
+    .warning {
+        color: #ff0000;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .validation-message {
+        color: #ff0000;
+    }
+
+    .input-group-sm {
+        margin-top: 1rem;
+    }
+
+    .otp-field{
+        text-align: center;
+    }
+
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type='number'] {
+        -moz-appearance: textfield; /* Firefox */
+    }
+</style>
+
+<body>
+    <div class="loading-backdrop" id="loadingBackdrop">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="d-flex flex-column" style="height: 100vh;">
+        <header class="bg-main text-white px-5 py-1" id="main-page-header">
+        </header>
+        <main class="d-flex flex-grow-1 flex-row">
+            <div class="" style="background-color: #edf2f7;" id="main-page-navigation">
+            </div>
+            <!--Render here-->
+            <div class="container">
+                <h1>Profile</h1>
+                <form action="">
+                    <!-- UserName -->
+                    <div class="input-group-container">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">UserName</span>
+                            </div>
+                            <input id="userNameInput" type="text" class="form-control" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div id="userNameValidation" class="validation-message"></div>
+                    <!-- Phone -->
+                    <div class="input-group-container">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Phone</span>
+                            </div>
+                            <input id="phone" type="number" class="form-control" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                                <button id="sendOtp" type="button" class="btn btn-outline-primary">Send OTP</button>
+                        </div>
+                    </div>
+                    <div id="phoneValidation" class="validation-message"></div>
+                    <div class="input-group input-group-sm" id="otp-container" style="display: none;">
+                        <div class="input-group-prepend">       
+                        </div>          
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp1"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp2');"
+                        onkeydown="focusPreviousInput(this, 'otp1')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp2"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp3', 'otp1');"
+                        onkeydown="focusPreviousInput(this, 'otp1')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp3"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp4', 'otp2');"
+                        onkeydown="focusPreviousInput(this, 'otp2')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp4"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp5', 'otp3');"
+                        onkeydown="focusPreviousInput(this, 'otp3')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp5"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp6', 'otp4');"
+                        onkeydown="focusPreviousInput(this, 'otp4')"  >
+                        <input 
+                        type="number"
+                        class="otp-field"
+                        id="otp6"
+                        min="0"
+                        max="9"
+                        autofocus
+                        oninput="limitToOneDigit(this); moveToNextInput(this, 'otp6', 'otp5');"
+                        onkeydown="focusPreviousInput(this, 'otp5')"  >
+                        <button id="verifyOtp" type="button">Verify</button>
+                        <small id="verify"></small>
+                        <span></span>
+                    </div>
+                    <!-- DOB -->
+                    <div class="input-group-container">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">DOB</span>
+                            </div>
+                            <input id="dob" type="date" class="form-control" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div id="dobValidation" class="validation-message"></div>
+                    <!-- Gender -->
+                    <div class="form-check">
+                        <input id="male" class="form-check-input" type="radio" name="gender" id="male" value="male">
+                        <label class="form-check-label" for="male">
+                            Male
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input id="female" class="form-check-input" type="radio" name="gender" id="female"
+                            value="female">
+                        <label class="form-check-label" for="female">
+                            Female
+                        </label>
+                    </div>
+                    <!-- Image -->
+                    <div class="input-group-container">
+                        <label for="formFile" class="form-label">Choose your image</label>
+                        <input id="formFile" class="form-control" type="file" id="formFile" accept="image/*">
+                    </div>
+                    <div id="imageValidation" class="validation-message"></div>
+
+                    <button style="margin-top: 1rem;" id="submit" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <br>
+                <br>
+                <br>
+                <h1>Change password</h1>
+                <form id="changePasswordForm">
+                    <!--Old password-->
+                    <div class="input-group-container">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">Old password</span>
+                            </div>
+                            <input id="currentPasswordInput" type="password" class="form-control" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div id="currentPasswordValidation" class="validation-message"></div>
+
+                    <!--New Password-->
+                    <div class="input-group-container">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">New password</span>
+                            </div>
+                            <input id="newPasswordInput" type="password" class="form-control" aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default">
+                        </div>
+                    </div>
+                    <div id="newPasswordValidation" class="validation-message"></div>
+                    <button style="margin-top: 1rem;" id="changePassword-submit" type="submit"
+                        class="btn btn-outline-danger">Submit</button>
+                </form>
+            </div>
+    </div>
+
+    </main>
+    <footer class="bg-main text-center text-white p-3" id="main-page-footer">
+    </footer>
+    </div>
+    <script>
+        function limitToOneDigit(inputField) {
+          if (inputField.value > 9) {
+            inputField.value = 9;
+          }
+        }
+        function moveToNextInput(inputField, nextInputId, previousInputId) {
+          if (inputField.value && inputField.value.length === 1) {
+            const nextInput = document.getElementById(nextInputId);
+            if (nextInput) {
+              nextInput.focus();
+            }
+          }
+        }
+        function focusPreviousInput(inputField, previousInputId) {
+          if (inputField.value === "" && event.key === "Backspace") {
+            const previousInput = document.getElementById(previousInputId);
+            if (previousInput) {
+              previousInput.focus();
+            }
+          }
+        }
+      </script>
+    <script src="component/header.js"></script>
+    <script src="component/footer.js"></script>
+    <script src="component/navbar.js"></script>
+    <script src="js/porfileValidation.js" type="module"></script>
+    <script src="js/changePasswordValidation.js" type="module"></script>
+    <script src="js/changePassword.js" type="module"></script>
+    <script src="js/profile.js" type="module"></script>
+    <script src="js/default.js" type="module"></script>
+</body>
+
+</html>
